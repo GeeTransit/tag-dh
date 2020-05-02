@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<!-- New Task -->
-<h3>New Task</h3>
-<form method="POST">
-    <center>
-        <input type="text" placeholder="Task Name" name="name" required>
-        <button type="submit">Add Task</button>
-    </center>
-</form>
+  <form action="{{ url_for('task_list.logout') }}" method="GET">
+    <button type="submit">Logout</button>
+  </form>
+
+  <!-- New Task -->
+  <h3>New Task</h3>
+  <form method="POST">
+    <input type="text" placeholder="Task Name" name="name" required>
+    <button type="submit">Add Task</button>
+  </form>
 
 <!-- Current Tasks -->
 {% if tasks %}
