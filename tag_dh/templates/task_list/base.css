@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
 .headerBar {
     background-color: black;
 }
@@ -5,3 +9,5 @@
 .dark_mode {
     float: right;
 }
+
+{% endblock %}

@@ -1,15 +1,14 @@
 <!DOCTYPE HTML>
 <head>
-    <link rel="stylesheet" type="text/css" href="base.css">
     <title>{% block title %}{% endblock %}</title>
+    <style>{% block style %}{% endblock %}</style>
 </head>
 
 <body>
-<div class="headerBar">
-    <button class="dark_mode">Dark Mode</button>
-</div>
+    <div class="headerBar">
+        <button class="dark_mode">Dark Mode</button>
+    </div>
 
-<section>
     <header>
         {% block header %}{% endblock %}
     </header>
@@ -19,5 +18,4 @@
         {% endfor %}
         {% block content %}{% endblock %}
     </center>
-</section>
 </body>
