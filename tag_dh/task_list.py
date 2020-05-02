@@ -3,11 +3,11 @@ from flask import (
 )
 
 from tag_dh import db
-from tag_dh.models import Task
+from tag_dh.models import Task, Account
 
 bp = Blueprint('task_list', __name__)
 
-@bp.route('/signup', methods=('GET','POST'))
+@bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
         username = request.form["username"]
@@ -17,8 +17,10 @@ def signup():
             flash("The passwords don't match")
             return redirect(url_for('task_list.signup'))
         else:
-            db.session.add(Account(user=username,pwrd=password))
+            db.session.add(Account(user=username, pwrd=password))
+            db.session.commit()
             flash("Account successfully created")
+            return redirect(url_for('task_list.login'))
 
     return render_template('task_list/signup.html')
 
@@ -54,7 +56,7 @@ def index():
     if request.method == 'POST':
         name = request.form['name']
         if not name:
-            flash('Task name is required.')
+            flash('Task name is required.', username)
         else:
             db.session.add(Task(name=name))
             db.session.commit()
