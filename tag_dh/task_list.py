@@ -20,7 +20,7 @@ def signup():
             db.session.add(Account(user=username,pwrd=password))
             flash("Account successfully created")
 
-    return render_template('task_list/signup.html'))
+    return render_template('task_list/signup.html')
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
