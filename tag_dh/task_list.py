@@ -14,7 +14,7 @@ def login():
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-	return redirect(url_for.('task_list.login'))
+	return redirect(url_for('task_list.login'))
 	
     if request.method == 'POST':
         name = request.form['name']
