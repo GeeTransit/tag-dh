@@ -1,7 +1,21 @@
 <!DOCTYPE HTML>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <style>{% block style %}{% endblock %}</style>
+    <style> 
+    body {
+        margin: 0;
+    }
+    .headerBar {
+        background-color: #303030;
+        margin: 0 0;
+        height: 60px;
+    }
+
+    .dark_mode {
+        float: right;
+    }
+
+    </style>
 </head>
 
 <body>
@@ -9,9 +23,9 @@
         <button class="dark_mode">Dark Mode</button>
     </div>
 
-    <header>
+    <div>
         {% block header %}{% endblock %}
-    </header>
+    </div>
     <center>
         {% for message in get_flashed_messages() %}
             <p>{{ message }}</p>
