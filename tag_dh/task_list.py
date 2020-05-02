@@ -14,8 +14,8 @@ def login():
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-	return redirect(url_for('task_list.login'))
-'''
+    return redirect(url_for('task_list.login'))
+
     if request.method == 'POST':
         name = request.form['name']
         if not name:
@@ -26,7 +26,7 @@ def index():
 
     tasks = Task.query.all()
     return render_template('task_list/index.html', tasks=tasks)
-'''
+
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 def delete(id):
