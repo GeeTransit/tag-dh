@@ -2,11 +2,13 @@
 <title>{% block title %}{% endblock %}</title>
 
 <section>
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <p style="text-align:center">{{ message }}</p>
-  {% endfor %}
-  {% block content %}{% endblock %}
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+    <center>
+        <p>{{ message }}</p>
+    </center>
+    {% endfor %}
+    {% block content %}{% endblock %}
 </section>
