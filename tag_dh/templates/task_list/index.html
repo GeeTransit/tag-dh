@@ -5,36 +5,40 @@
 {% endblock %}
 
 {% block content %}
-  <form action="{{ url_for('task_list.logout') }}" method="GET">
-    <button type="submit">Logout</button>
-  </form>
+<form action="{{ url_for('task_list.logout') }}" method="GET">
+    <center>
+        <button type="submit" >Logout</button>
+    </center>
+</form>
 
-  <!-- New Task -->
-  <h3>New Task</h3>
-  <form method="POST">
-    <input type="text" placeholder="Task Name" name="name" required>
-    <button type="submit">Add Task</button>
-  </form>
+<!-- New Task -->
+<h3 style="text-align:center">New Task</h3>
+<form method="POST">
+    <center>
+        <input type="text" placeholder="Task Name" name="name" required>
+        <button type="submit">Add Task</button>
+
+</form>
 
 <!-- Current Tasks -->
+<center>
 {% if tasks %}
-<h3 class="card-title">Current Tasks</h3>
-    <table>
-        {% for task in tasks %}
-            <tr>
-                <!-- Task Name -->
-                <center>
-                    <td>{{ task['name'] }}</td>
-                    <!-- Delete Button -->
-                    <td>
-                        <form action="{{ url_for('task_list.delete', id=task['id']) }}" method="POST">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </center>
-            </tr>
-        {% endfor %}
-    </table>
+<h3 style="text-align:center" class="card-title">Current Tasks</h3>
+<table>
+    {% for task in tasks %}
+    <tr>
+        <!-- Task Name -->
+            <td>{{ task['name'] }}</td>
+            <!-- Delete Button -->
+            <td>
+                <form action="{{ url_for('task_list.delete', id=task['id']) }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+    </tr>
+    {% endfor %}
+</table>
+</center>
 
 {% endif %}
 {% endblock %}
