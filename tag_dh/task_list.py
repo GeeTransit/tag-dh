@@ -16,6 +16,12 @@ def login():
 	return render_template('task_list/login.html')
 
 
+@bp.route('/logout', methods=('GET','POST'))
+def logout():
+	session.pop('validUser', None)
+	return render_template('task_list/logout.html')
+
+
 @bp.route('/', methods=('GET', 'POST'))
 def index():
 	if not session.get('validUser', False):
