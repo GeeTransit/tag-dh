@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- https://tag-dh.herokuapp.com/login -->
 <html lang="en">
     <head>
         <title>Login Form</title>
@@ -7,7 +8,7 @@
     <body>
         <center>
             <h3>Login Here</h3>
-            <form action="login.php" method="post">
+            <form action="index.html" method="post">
                 <table>
                     <tr>
                         <td>Username:</td>
@@ -29,7 +30,7 @@
                 function validate() {
                     if(document.getElementById("usr").value == "teacher" && document.getElementById("pwr").value == "generic" ) {
                         alert("validation succeeded");
-                        // location.href="directory/main.html";
+                        location.href="index.html";
                     } else {
                         alert("validation failed");
                         // location.href="fail.html";
