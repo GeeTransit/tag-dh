@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block content %}
+  <form action="{{ url_for('task_list.logout') }}" method="GET">
+    <button type="submit">Logout</button>
+  </form>
+
   <!-- New Task -->
   <h3>New Task</h3>
   <form method="POST">
