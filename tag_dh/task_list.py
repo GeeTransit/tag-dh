@@ -19,7 +19,7 @@ def index():
 
 	if isinstance(isValid, bool):
 
-    	if request.method == 'POST':
+		if request.method == 'POST':
         	name = request.form['name']
         	if not name:
         	    flash('Task name is required.')
