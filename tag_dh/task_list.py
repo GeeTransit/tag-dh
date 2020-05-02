@@ -7,26 +7,31 @@ from tag_dh.models import Task
 
 bp = Blueprint('task_list', __name__)
 
-@bp.route('/login', methods=('GET',))
+@bp.route('/login', methods=('POST',))
 def login():
+	session['validUser'] = true
 	return render_template('task_list/loginpage.html')
 
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-    return redirect(url_for('task_list.login'))
+	isValid = session.get('validUser')
 
-    if request.method == 'POST':
-        name = request.form['name']
-        if not name:
-            flash('Task name is required.')
-        else:
-            db.session.add(Task(name=name))
-            db.session.commit()
+	if isinstance(isValid, bool):
 
-    tasks = Task.query.all()
-    return render_template('task_list/index.html', tasks=tasks)
+    	if request.method == 'POST':
+        	name = request.form['name']
+        	if not name:
+        	    flash('Task name is required.')
+        	else:
+        	    db.session.add(Task(name=name))
+        	    db.session.commit()
+	
+	    tasks = Task.query.all()
+	    return render_template('task_list/index.html', tasks=tasks)
 
+	else 
+		return redirect(url_for('task_list.login'))
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 def delete(id):
