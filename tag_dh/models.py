@@ -10,4 +10,4 @@ class Task(db.Model):
 class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Text(), nullable=False)
-    pass = db.Column(db.Text(), nullable=False)
+    pwrd = db.Column(db.Text(), nullable=False)
