@@ -15,7 +15,7 @@ def signup():
         chk-password = request.form["chk-password"]
         if password != chk-password:
             flash("The passwords don't match")
-            return redirect(url_for('task_list.signup')
+            return redirect(url_for('task_list.signup'))
         else:
             db.session.add(Account(user=username,pwrd=password))
             flash("Account successfully created")
