@@ -20,7 +20,7 @@ def signup():
             db.session.add(Account(user=username, pwrd=password))
             db.session.commit()
             flash("Account successfully created")
-            return redirect(url_for('task_list.login'))
+            return redirect(url_for('task_list.index'))
 
     return render_template('task_list/signup.html')
 
