@@ -5,11 +5,41 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    body {
+        font-family: Arial;
+    }
+
+    input[type=text],
+    input[type=password] {
+        font-family: Arial;
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        font-family: Arial;
+        background-color: rgb(180, 52, 52);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+    }
+</style>    
+
 <form method="POST">
-    <input type="text" placeholder="Username" name="username" required>
-    <input type="password" placeholder="Password" name="password" required>
-    <input type="password" placeholder="Re-enter Password" name="chk_password" required>
-    <button type="submit">Create</button>
-</form>
+    <center>
+        <input type="text" placeholder="Username" name="username" required></br>
+        <input type="password" placeholder="Password" name="password" required></br>
+        <input type="password" placeholder="Re-enter Password" name="chk_password" required></br>
+        <button type="submit">Create</button>
+    </center>
+    </form>
 <p>Alternatively, you can <a href="{{ url_for('task_list.login') }}">log in</a> using an existing account.</p>
 {% endblock %}
