@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<p>Hey there, {{session['username']}}</p>
 <form action="{{ url_for('task_list.logout') }}" method="GET">
     <button type="submit">Logout</button>
 </form>
