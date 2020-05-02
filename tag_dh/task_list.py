@@ -9,7 +9,7 @@ bp = Blueprint('task_list', __name__)
 
 @bp.route('/login', methods=('GET',))
 def login():
-	return render_template('task_list/loginpage.html')
+	return render_template('task_list/index.html')
 
 
 @bp.route('/', methods=('GET', 'POST'))
