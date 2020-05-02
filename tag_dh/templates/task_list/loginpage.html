@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login Form</title>
+    </head>
+
+    <body>
+        <center>
+            <h3>Login Here</h3>
+            <form action="login.php" method="post">
+                <table>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input type="text" name="user" id="usr"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="user" id="pwr"></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="button" value="Login" onclick="javascript:validate()"/></td>
+                    </tr>
+                </table>
+            </form>
+
+            <script type="text/javascript">
+                function validate() {
+                    if(document.getElementById("usr").value == "teacher" && document.getElementById("pwr").value == "generic" ) {
+                        alert("validation succeeded");
+                        // location.href="directory/main.html";
+                    } else {
+                        alert("validation failed");
+                        // location.href="fail.html";
+                    }
+                }
+            </script>
+        </center>
+    </body>
+</html>
