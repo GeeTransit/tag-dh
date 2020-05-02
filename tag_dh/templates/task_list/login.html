@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 style="text-align:center">{% block title %}Login Page{% endblock %}</h1>
+<h1 style="text-align:center">{% block title %}Login Page{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <div>
-    <form method="POST">
-      <input type="text" class="form-control" placeholder="Username" name="username" required>
-      <input type="password" class="form-control" placeholder="Password" name="password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
+    <center>
+        <form method="POST">
+            <input type="text" class="form-control" placeholder="Username" name="username" required>
+            <input type="password" class="form-control" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </center>
 {% endblock %}

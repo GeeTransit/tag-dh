@@ -1,106 +1,115 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
+    <style>
+        /* Set height of body and the document to 100% to enable "full page tabs" */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
 
-            body {
-                font-family: Arial;
-            }
+        /* Style tab links */
+        .tablink {
+            background-color: rgb(242,242,242);
+            color: black;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 33.33333333333%;
+        }
 
-            /* Style the tab */
-            .tab {
-                overflow: hidden;
-                border: 1px solid #ccc;
-                background-color: #f1f1f1;
-                margin: 0;
-                position: absolute;
-                top: 95%;
-                left: 50%;
-                -ms-transform: translate(-50%, -100%);
-                transform: translate(-50%, -100%);
-            }
+        .tablink:hover {
+            background-color: rgb(255, 190, 190);
+        }
 
-            /* Style the buttons inside the tab */
-            .tab button {
-                background-color: inherit;
-                float: left;
-                border: none;
-                outline: none;
-                cursor: pointer;
-                padding: 14px 100px;
-                transition: 0.3s;
-                font-size: 17px;
-            }
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: black;
+            display: none;
+            padding: 100px 20px;
+            height: 100%;
+        }
 
-            /* Change background color of buttons on hover */
-            .tab button:hover {
-                background-color: #ddd;
-            }
+        /* #Teams {
+            background-color: white;
+        }
 
-            /* Create an active/current tablink class */
-            .tab button.active {
-                background-color: #ccc;
-            }
+        #News {
+            background-color: white;
+        }
 
-            /* Style the tab content */
-            .tabcontent {
-                display: none;
-                padding: 6px 12px;
-                border: 1px solid #ccc;
-                border-top: none;
-            }
-        </style>
-    </head>
+        #Assignments {
+            background-color: white;
+        }
+
+        #Profile {
+            background-color: white;
+        } */
+    </style>
 
     <body>
-        <center>
-            <!-- Tab links -->
-            <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'Teams')">Teams</button>
-                <button class="tablinks" onclick="openCity(event, 'Assignment')">Assignment</button>
-                <button class="tablinks" onclick="openCity(event, 'Profile')">Profile</button>
-            </div>
+        <button class="tablink" onclick="openPage('Teams', this, 'rgb(220,53,69)')">Teams</button>
+        <button class="tablink" onclick="openPage('Assignments', this, 'rgb(220,53,69)')">Assignments</button>
+        <button class="tablink" onclick="openPage('Profile', this, 'rgb(220,53,69)')" id="defaultOpen">Profile</button>
 
-            <!-- Tab content -->
-            <div id="Teams" class="tabcontent">
+        <div id="Teams" class="tabcontent">
+            <center>
                 <h3>Teams</h3>
-                <p>List of the teams</p>
-            </div>
+                <p>Teams is where the heart is..</p>
+            </center>
+        </div>
 
-            <div id="Assignment" class="tabcontent">
-                <h3>Math</h3>
-                <p>Math quiz google form?</p>
-            </div>
+        <div id="News" class="tabcontent">
+            <center>
+                <h3>News</h3>
+                <p>Some news this fine day!</p>
+            </center>
+        </div>
 
-            <div id="Profile" class="tabcontent">
+        <div id="Assignments" class="tabcontent">
+            <center>
+                <h3>Assignments</h3>
+                <p>Get in touch, or swing by for a cup of coffee.</p>
+            </center>
+        </div>
+
+        <div id="Profile" class="tabcontent">
+            <center>
                 <h3>Profile</h3>
-                <p>Log out, stats, and all the other good stuff</p>
-            </div>
-        </center>
+                <p>Who we are and what we do.</p>
+            </center>
+        </div>
     </body>
 
     <script>
-        function openCity(evt, cityName) {
-        // Declare all variables
+        function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
         var i, tabcontent, tablinks;
 
-        // Get all elements with class="tabcontent" and hide them
+    
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
 
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
         for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            tablinks[i].style.backgroundColor = "";
         }
 
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+        document.getElementsByClassName('tablink').style.color = rgb(225, 225, 225);  
         }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
     </script>
-
-</html> 
+</html>

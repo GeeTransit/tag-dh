@@ -1,37 +1,35 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 style="text-align:center">{% block title %}Task List{% endblock %}</h1>
+<h1 style="text-align:center">{% block title %}Task List{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <!-- New Task -->
-  <div>
-    <h3>New Task</h3>
-    <form method="POST">
-      <input type="text" placeholder="Task Name" name="name" required>
-      <button type="submit">Add Task</button>
-    </form>
-  </div>
+<!-- New Task -->
+<h3>New Task</h3>
+<form method="POST">
+    <center>
+        <input type="text" placeholder="Task Name" name="name" required>
+        <button type="submit">Add Task</button>
+    </center>
+</form>
 
-  <!-- Current Tasks -->
-  {% if tasks %}
-    <div>
-      <h3 class="card-title">Current Tasks</h3>
-      <table>
-        {% for task in tasks %}
-          <tr>
-            <!-- Task Name -->
-            <td>{{ task['name'] }}</td>
-            <!-- Delete Button -->
-            <td>
-              <form action="{{ url_for('task_list.delete', id=task['id']) }}" method="POST">
+<!-- Current Tasks -->
+{% if tasks %}
+<h3 class="card-title">Current Tasks</h3>
+<table>
+    {% for task in tasks %}
+    <tr>
+        <!-- Task Name -->
+        <td>{{ task['name'] }}</td>
+        <!-- Delete Button -->
+        <td>
+            <form action="{{ url_for('task_list.delete', id=task['id']) }}" method="POST">
                 <button type="submit">Delete</button>
-              </form>
-            </td>
-          </tr>
-        {% endfor %}
-      </table>
-    </div>
-  {% endif %}
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
 {% endblock %}
