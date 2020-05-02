@@ -7,6 +7,12 @@ from tag_dh.models import Task
 
 bp = Blueprint('task_list', __name__)
 
+@bp.route('/signup', methods=('GET','POST'))
+def signup():
+	if request.method == "POST":
+
+	return render_template('task_list/signup.html'))
+
 @bp.route('/login', methods=('GET','POST'))
 def login():
     if session.get("validUser", False):

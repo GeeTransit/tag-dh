@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 style="text-align:center">{% block title %}Sign up{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <center>
+        <input type="text" class="form-control" placeholder="Username" name="username" required>
+        <input type="password" class="form-control" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" placeholder="Re-enter password" name="password" required>
+        <button type="submit">Enter</button>
+    </center>
+</form>
+{% endblock %}
