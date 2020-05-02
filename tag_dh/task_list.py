@@ -9,14 +9,14 @@ bp = Blueprint('task_list', __name__)
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
-	session['validUser'] = true
+	session['validUser'] = 1
 	return render_template('task_list/loginpage.html')
 		
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
 	
-	if 'username' in session:
+	if 'validUser' in session:
 
 		if request.method == 'POST':
 			name = request.form['name']
