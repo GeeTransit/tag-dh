@@ -1,15 +1,27 @@
-<!-- <html>
+{% extends 'base.html' %}
 
-<head>
-    <title>CHAT</title>
-</head>
+{% block header %}
+<h1 style="text-align:center">{% block title %}Task List{% endblock %}</h1>
+{% endblock %}
 
-<body>
-    <div class="chatbox">
-        <div class='charHeader'>
-            <h3>Welcome</h3>>
-        </div>
-    </div>
-</body>
+{% block content %}
 
-</html> -->
+<!-- New Task -->
+<h3 style="text-align:center">New Task</h3>
+<form method="POST">
+    <input type="text" placeholder="Say something" name="name" required>
+    <button type="submit">Send</button>
+</form>
+
+<!-- Current Tasks -->
+{% if tasks %}
+<table>
+    {% for task in tasks %}
+    <tr>
+        <!-- Task Name -->
+        <td>{{ task['name'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
