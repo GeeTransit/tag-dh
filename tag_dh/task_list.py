@@ -14,7 +14,7 @@ def login():
 
 
 @bp.route('/logout', methods=('GET','POST'))
-def logout();
+def logout():
 	session.pop('validUser', None)
 	return render_template('task_list/logout.html')
 
