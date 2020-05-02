@@ -2,8 +2,8 @@ from flask import (
     Blueprint, flash, redirect, render_template, request, url_for
 )
 
-from task_list import db
-from task_list.models import Task
+from tag_dh import db
+from tag_dh.models import Task
 
 bp = Blueprint('task_list', __name__)
 
