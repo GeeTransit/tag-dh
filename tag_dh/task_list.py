@@ -7,8 +7,15 @@ from tag_dh.models import Task
 
 bp = Blueprint('task_list', __name__)
 
+@bp.route('/login', methods=('GET',))
+def login():
+	return render_template('task_list/loginpage.html')
+
+
 @bp.route('/', methods=('GET', 'POST'))
 def index():
+	return redirect(url_for.('task_list.login'))
+	
     if request.method == 'POST':
         name = request.form['name']
         if not name:
