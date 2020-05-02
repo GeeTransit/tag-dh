@@ -32,7 +32,7 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if User.query.filter_by(user=username).filter_by(pwrd=password).first() == None:
+        if Account.query.filter_by(user=username).filter_by(pwrd=password).first() == None:
             flash("Incorrect username or password")
             return redirect(url_for('task_list.login'))
         else:
