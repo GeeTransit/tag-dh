@@ -9,28 +9,29 @@ bp = Blueprint('task_list', __name__)
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
-	session['validUser'] = 1
+    if session.get("validUser", False):
+        return redirect(url_for('task_list.index'))
+
+	session['validUser'] = True
 	return render_template('task_list/login.html')
-		
+
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-	
-	if 'validUser' in session:
+	if not session.get('validUser', False):
+        return redirect(url_for('task_list.login'))
 
-		if request.method == 'POST':
-			name = request.form['name']
-			if not name:
-				flash('Task name is required.')
-			else:
-				db.session.add(Task(name=name))
-				db.session.commit()
-	
-		tasks = Task.query.all()
-		return render_template('task_list/index.html', tasks=tasks)
+    if request.method == 'POST':
+        name = request.form['name']
+        if not name:
+            flash('Task name is required.')
+        else:
+            db.session.add(Task(name=name))
+            db.session.commit()
+        return redirect(url_for('task_list.index'))
 
-	else:
-		return redirect(url_for('task_list.login'))
+    tasks = Task.query.all()
+    return render_template('task_list/index.html', tasks=tasks)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
