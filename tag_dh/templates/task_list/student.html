@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        /* Set height of body and the document to 100% to enable "full page tabs" */
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial;
-        }
+<style>
+    /* Set height of body and the document to 100% to enable "full page tabs" */
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial;
+    }
 
-        /* Style tab links */
-        .tablink {
-            background-color: rgb(242,242,242);
-            color: black;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            width: 33.33333333333%;
-        }
+    /* Style tab links */
+    .tablink {
+        background-color: rgb(242, 242, 242);
+        color: black;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33333333333%;
+    }
 
-        .tablink:hover {
-            background-color: rgb(255, 190, 190);
-        }
+    .tablink:hover {
+        background-color: rgb(255, 190, 190);
+    }
 
-        /* Style the tab content (and add height:100% for full page content) */
-        .tabcontent {
-            color: black;
-            display: none;
-            padding: 100px 20px;
-            height: 100%;
-        }
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+        color: black;
+        display: none;
+        padding: 100px 20px;
+        height: 100%;
+    }
 
-        /* #Teams {
+    /* #Teams {
             background-color: white;
         }
 
@@ -48,48 +49,48 @@
         #Profile {
             background-color: white;
         } */
-    </style>
+</style>
 
-    <body>
-        <button class="tablink" onclick="openPage('Teams', this, 'rgb(220,53,69)')">Teams</button>
-        <button class="tablink" onclick="openPage('Assignments', this, 'rgb(220,53,69)')">Assignments</button>
-        <button class="tablink" onclick="openPage('Profile', this, 'rgb(220,53,69)')" id="defaultOpen">Profile</button>
+<body>
+    <button class="tablink" onclick="openPage('Teams', this, 'rgb(220,53,69)')">Teams</button>
+    <button class="tablink" onclick="openPage('Assignments', this, 'rgb(220,53,69)')">Assignments</button>
+    <button class="tablink" onclick="openPage('Profile', this, 'rgb(220,53,69)')" id="defaultOpen">Profile</button>
 
-        <div id="Teams" class="tabcontent">
-            <center>
-                <h3>Teams</h3>
-                <p>Teams is where the heart is..</p>
-            </center>
-        </div>
+    <div id="Teams" class="tabcontent">
+        <center>
+            <h3>Teams</h3>
+            <p>Teams is where the heart is..</p>
+        </center>
+    </div>
 
-        <div id="News" class="tabcontent">
-            <center>
-                <h3>News</h3>
-                <p>Some news this fine day!</p>
-            </center>
-        </div>
+    <div id="News" class="tabcontent">
+        <center>
+            <h3>News</h3>
+            <p>Some news this fine day!</p>
+        </center>
+    </div>
 
-        <div id="Assignments" class="tabcontent">
-            <center>
-                <h3>Assignments</h3>
-                <p>Get in touch, or swing by for a cup of coffee.</p>
-            </center>
-        </div>
+    <div id="Assignments" class="tabcontent">
+        <center>
+            <h3>Assignments</h3>
+            <p>Get in touch, or swing by for a cup of coffee.</p>
+        </center>
+    </div>
 
-        <div id="Profile" class="tabcontent">
-            <center>
-                <h3>Profile</h3>
-                <p>Who we are and what we do.</p>
-            </center>
-        </div>
-    </body>
+    <div id="Profile" class="tabcontent">
+        <center>
+            <h3>Profile</h3>
+            <p>Who we are and what we do.</p>
+        </center>
+    </div>
+</body>
 
-    <script>
-        function openPage(pageName, elmnt, color) {
+<script>
+    function openPage(pageName, elmnt, color) {
         // Hide all elements with class="tabcontent" by default */
         var i, tabcontent, tablinks;
 
-    
+
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
@@ -106,10 +107,11 @@
 
         // Add the specific color to the button used to open the tab content
         elmnt.style.backgroundColor = color;
-        document.getElementsByClassName('tablink').style.color = rgb(225, 225, 225);  
-        }
+        document.getElementsByClassName('tablink').style.color = rgb(225, 225, 225);
+    }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
 </html>
