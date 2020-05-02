@@ -12,7 +12,7 @@ def create_app():
         SECRET_KEY = os.environ.get('SECRET_KEY', 'dev_key'),
         SQLALCHEMY_DATABASE_URI = os.environ.get(
             'DATABASE_URL',
-            'sqlite:///' + os.path.join(app.instance_path, 'task_list.sqlite')
+            'sqlite:///' + os.path.join(app.instance_path, 'tag_dh.sqlite')
         ),
         SQLALCHEMY_TRACK_MODIFICATIONS = False
     )
