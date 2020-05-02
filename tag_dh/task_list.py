@@ -12,8 +12,8 @@ def signup():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        chk-password = request.form["chk-password"]
-        if password != chk-password:
+        chk_password = request.form["chk_password"]
+        if password != chk_password:
             flash("The passwords don't match")
             return redirect(url_for('task_list.signup'))
         else:
