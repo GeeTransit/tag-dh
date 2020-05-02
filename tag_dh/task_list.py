@@ -30,7 +30,7 @@ def index():
 		tasks = Task.query.all()
 		return render_template('task_list/index.html', tasks=tasks)
 
-	else 
+	else:
 		return redirect(url_for('task_list.login'))
 
 @bp.route('/<int:id>/delete', methods=('POST',))
