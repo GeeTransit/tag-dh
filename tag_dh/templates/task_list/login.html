@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<!-- https://tag-dh.herokuapp.com/login -->
-<html lang="en">
-    <head>
-        <title>Login Form</title>
-    </head>
+{% extends 'base.html' %}
 
-    <body>
-        <center>
-            <h3>Login Here</h3>
-            <form method="POST">
-                <table>
-                    <tr>
-                        <td>Username:</td>
-                        <td><input type="text" name="username"></td>
-                    </tr>
+{% block header %}
+  <h1 style="text-align:center">{% block title %}Login Page{% endblock %}</h1>
+{% endblock %}
 
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password"></td>
-                    </tr>
-
-                    <tr>
-                        <td><button type="submit">Login</button></td>
-                    </tr>
-                </table>
-            </form>
-        </center>
-    </body>
-</html>
+{% block content %}
+  <div>
+    <form method="POST">
+      <input type="text" class="form-control" placeholder="Username" name="username" required>
+      <input type="password" class="form-control" placeholder="Password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+{% endblock %}

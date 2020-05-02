@@ -24,12 +24,11 @@ def login():
     
     return render_template('task_list/login.html')
 
-
-
 @bp.route('/logout', methods=('GET','POST'))
 def logout():
-    session.pop('validUser', None)
-    return render_template('task_list/logout.html')
+    session['validUser'] = False
+    flash("You have been logged out.")
+    return redirect(url_for('task_list.login'))
 
 
 @bp.route('/', methods=('GET', 'POST'))
