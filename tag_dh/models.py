@@ -5,4 +5,4 @@ class Task(db.Model):
     name = db.Column(db.Text(), nullable=False)
 
     def __repr__(self):
-        return '<Task: {}>'.format(self.name)
+        return f'<Task: {self.name}>'
