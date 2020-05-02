@@ -10,7 +10,7 @@ bp = Blueprint('task_list', __name__)
 @bp.route('/login', methods=('GET','POST'))
 def login():
 	session['validUser'] = 1
-	return render_template('task_list/loginpage.html')
+	return render_template('task_list/login.html')
 		
 
 @bp.route('/', methods=('GET', 'POST'))
