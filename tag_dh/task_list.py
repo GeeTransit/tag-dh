@@ -25,7 +25,7 @@ def signup():
 @bp.route('/login', methods=('GET','POST'))
 def login():
     if session.get("validUser", False):
-        return redirect(url_for('task_list.index')
+        return redirect(url_for('task_list.index'))
 
     if request.method == "POST":
         username = request.form["username"]
