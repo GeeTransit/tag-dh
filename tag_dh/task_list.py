@@ -20,15 +20,15 @@ def index():
 	if isinstance(isValid, bool):
 
 		if request.method == 'POST':
-        	name = request.form['name']
-        	if not name:
-        	    flash('Task name is required.')
-        	else:
-        	    db.session.add(Task(name=name))
+			name = request.form['name']
+			if not name:
+				flash('Task name is required.')
+			else:
+				db.session.add(Task(name=name))
         	    db.session.commit()
 	
-	    tasks = Task.query.all()
-	    return render_template('task_list/index.html', tasks=tasks)
+		tasks = Task.query.all()
+		return render_template('task_list/index.html', tasks=tasks)
 
 	else 
 		return redirect(url_for('task_list.login'))
