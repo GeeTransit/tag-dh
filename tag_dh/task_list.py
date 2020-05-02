@@ -11,7 +11,17 @@ bp = Blueprint('task_list', __name__)
 def login():
 	session['validUser'] = 1
 	return render_template('task_list/login.html')
+<<<<<<< HEAD
 		
+=======
+
+
+@bp.route('/logout', methods=('GET','POST'))
+def logout():
+	session.pop('validUser', None)
+	return render_template('task_list/logout.html')
+
+>>>>>>> dfb65dd7243c0f03c5261ea6760d1c932b085875
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
