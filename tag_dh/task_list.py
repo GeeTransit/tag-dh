@@ -9,9 +9,18 @@ bp = Blueprint('task_list', __name__)
 
 @bp.route('/signup', methods=('GET','POST'))
 def signup():
-	if request.method == "POST":
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        chk-password = request.form["chk-password"]
+        if password != chk-password:
+            flash("The passwords don't match")
+            return redirect(url_for('task_list.signup')
+        else:
+            db.session.add(Account(user=username,pwrd=password))
+            flash("Account successfully created")
 
-	return render_template('task_list/signup.html'))
+    return render_template('task_list/signup.html'))
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
