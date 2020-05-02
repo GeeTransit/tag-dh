@@ -5,10 +5,41 @@
 {% endblock %}
 
 {% block content %}
+
+<style>
+    body {
+        font-family: Arial;
+    }
+
+    input[type=text],
+    input[type=password] {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 15%;
+    }
+
+</style>
+
 <form method="POST">
-    <input type="text" placeholder="Username" name="username" required>
-    <input type="password" placeholder="Password" name="password" required>
-    <button type="submit">Enter</button>
+    <center>
+        <input type="text" placeholder="Username" name="username" required></br>
+        <input type="password" placeholder="Password" name="password" required></br>
+        <button type="submit">Enter</button>
+        <button type="button" onclick=location.href="{{ url_for('task_list.signup') }}">Sign up</button>
+    </center>
 </form>
-<p>Alternatively, you can <a href="{{ url_for('task_list.signup') }}">sign up</a> for an account.</p>
+<!-- <span class="psw">Alternatively, you can <a href="{{ url_for('task_list.signup') }}">sign up</a> for an account.</span> -->
 {% endblock %}
