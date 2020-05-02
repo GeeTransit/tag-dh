@@ -7,17 +7,16 @@ from tag_dh.models import Task
 
 bp = Blueprint('task_list', __name__)
 
-@bp.route('/login', methods=('POST',))
+@bp.route('/login', methods=('GET','POST'))
 def login():
 	session['validUser'] = true
 	return render_template('task_list/loginpage.html')
-
+		
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-	isValid = session.get('validUser')
-
-	if isinstance(isValid, bool):
+	
+	if 'username' in session:
 
 		if request.method == 'POST':
 			name = request.form['name']
@@ -32,6 +31,7 @@ def index():
 
 	else:
 		return redirect(url_for('task_list.login'))
+
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 def delete(id):
