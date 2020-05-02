@@ -25,7 +25,7 @@ def index():
 				flash('Task name is required.')
 			else:
 				db.session.add(Task(name=name))
-        	    db.session.commit()
+				db.session.commit()
 	
 		tasks = Task.query.all()
 		return render_template('task_list/index.html', tasks=tasks)
