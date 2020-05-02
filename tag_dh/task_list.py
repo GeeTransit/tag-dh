@@ -12,7 +12,16 @@ def login():
     if session.get("validUser", False):
         return redirect(url_for('task_list.index'))
 
-    session['validUser'] = True
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if username != "teacher" or password != "generic":
+            flash("Incorrect username / password.")
+            return redirect(url_for('task_list.login'))
+        else:
+            session['validUser'] = True
+            return redirect(url_for('task_list.index'))
+    
     return render_template('task_list/login.html')
 
 
