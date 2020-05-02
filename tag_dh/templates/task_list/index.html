@@ -21,9 +21,9 @@
 <h3 class="card-title">Current Tasks</h3>
     <table>
         {% for task in tasks %}
-            </center>
-                <tr>
-                    <!-- Task Name -->
+            <tr>
+                <!-- Task Name -->
+                <center>
                     <td>{{ task['name'] }}</td>
                     <!-- Delete Button -->
                     <td>
@@ -31,8 +31,8 @@
                             <button type="submit">Delete</button>
                         </form>
                     </td>
-                </tr>
-            </center>
+                </center>
+            </tr>
         {% endfor %}
     </table>
 
