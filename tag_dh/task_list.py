@@ -7,7 +7,6 @@ from tag_dh.models import Task, Account
 
 bp = Blueprint('task_list', __name__)
 
-
 @bp.route('/student', methods=('GET',))
 def student():
     return render_template('task_list/student.html')
@@ -15,8 +14,6 @@ def student():
 @bp.route('/teacher', methods=('GET',))
 def teacher():
     return render_template('task_list/teacher.html')
-
-
 
 @bp.route('/tasks', methods=('GET', 'POST'))
 def index():

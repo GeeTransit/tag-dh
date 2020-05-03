@@ -1,3 +1,4 @@
+'''
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session
 )
@@ -14,3 +15,4 @@ def index():
 @bp.route('/', methods=['GET'])
 def mainindex():
     return redirect(url_for("task_list.index"))
+'''
