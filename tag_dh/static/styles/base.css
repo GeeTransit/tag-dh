@@ -54,9 +54,10 @@
     
     .task {
         width: 70%;
+        max-width: 400px;
     }
 
     .delete {
         width: 100%;
-		max-width: 100px;
+        max-width: 100px;
     }
