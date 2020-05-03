@@ -1,10 +1,24 @@
 from tag_dh import db
 
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    members = relationship("Account")
+    name = db.Column(db.String(64), nullable=False)
+    health = db.Column(db.Integer, nullable=False)
+
+class Submission(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    task = db.relationship("Task", uselist=False, back_populates="")
+    percent_mark = db.relationship(db.Integer, nullable=False)
+    
+
 class Task(db.Model):
     __tablename__ = 'task'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
+    task_id = db.Column(db.Integer, ForeignKey('submission.id')
+    submission = db.relationship("Submission", back_populates=task)
 
     def __repr__(self):
         return f'<Task: {self.name}>'
