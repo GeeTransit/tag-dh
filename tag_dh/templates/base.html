@@ -9,9 +9,13 @@
 <body>
     <div class="header">
         <center>
-            <form action="{{ url_for('task_list.logout') }}" method="GET">
+            <form action="{{ url_for('task_list.index') }}" method="GET">
                 <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            </form>
+            <form action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
                 <button style="float: right;" class="dark_mode">Dark Mode</button>
+            </form>
+            <form action="{{ url_for('task_list.logout') }}" method="GET">
                 <button style="float: right;" type="submit" class="logout">Logout</button>
             </form>
         </center>
