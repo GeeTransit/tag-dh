@@ -7,34 +7,20 @@
 
 </style>
 <body>
-    <div class="header">
-        <form action="{{ url_for('task_list.index') }}" method="GET">
-            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-        </form>
-        <form action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
-            <button style="float: right;" class="dark_mode">Dark Mode</button>
-        </form>
-        <form action="{{ url_for('task_list.logout') }}" method="GET">
-            <button style="float: right;" type="submit" class="logout">Logout</button>
-        </form>
-        <!-- <table class="temp"> <tbody>
-            <tr>
-
-            <td class="left">
-            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-            </td>
-
-            <td class="right">
-            <table> <tbody> <tr>
-            <td> <button class="dark_mode">Dark Mode</button> </td>
-            <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
-                <button type="submit" class="logout">Logout</button>
-            </form> </td>
-            </tr> </tbody> </table>
-            </td>
-
-            </tr>
-        <tbody> </table> -->
+    <div class="bar">
+        <div class="header">
+            <form action="{{ url_for('task_list.index') }}" method="GET">
+                <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            </form>
+            <div class="controls">
+                <form class="control" action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
+                    <button class="control dark_mode">Dark Mode</button>
+                </form>
+                <form class="control" action="{{ url_for('task_list.logout') }}" method="GET">
+                    <button class="logout" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <center>

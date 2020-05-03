@@ -1,16 +1,26 @@
-html {
-    overflow-x: hidden;
-}
+html { }
 body {
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.header {
+.bar {
     background-color: #303030;
-    width: 100%;
+	min-width: 100%;
 }
 
+.header {
+    max-width: 60%;
+	min-height: 50px;
+	margin: 0 auto;
+	padding: .6rem .6rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	overflow: hidden;
+}
+/* 
 .left {
     padding-up: 10%
     padding-down: 10%;
@@ -21,6 +31,14 @@ body {
 .right {
     padding-left: 60%;
     padding-right: 20%;
+} */
+
+.controls {
+	float: right;
+}
+
+.control {
+	display: inline-block;
 }
 
 .dark_mode {
