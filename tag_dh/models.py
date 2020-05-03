@@ -13,7 +13,7 @@ class Submission(db.Model):
     percent_mark = db.Column(db.Integer)  # null = unmarked
     percent_mark = db.Column(db.Integer, nullable=False)
     
-    task_id = db.Column(db.Integer, ForeignKey('task.id'))
+    task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
     task = db.relationship("Task", back_populates="submissions")
 
     def __repr__(self):
@@ -80,7 +80,7 @@ class Account(db.Model):
     pwrd = db.Column(db.Text, nullable=False)
     badges = db.Column(db.Text)
     
-    team_id = db.Column(Team, ForeignKey("team.id"))  # can be None (teamless)
+    team_id = db.Column(Team, db.ForeignKey("team.id"))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
 
     def __repr__(self):
