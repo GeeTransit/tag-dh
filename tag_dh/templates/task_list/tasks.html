@@ -25,7 +25,7 @@
         
         <!-- Task View -->
         <td>
-            <form action="{{ url_for('task_list.task', id=task['id']) }}" method="GET">
+            <form class="view_button" action="{{ url_for('task_list.task', id=task['id']) }}" method="GET">
                 <button type="submit">View</button>
             </form>
         </td>

@@ -22,6 +22,10 @@ body {
     padding-right: 20%;
 } */
 
+.view_button {
+    width: 85px;
+}
+
 .dark_mode {
     display: inline-block;
     box-sizing: border-box;
