@@ -5,11 +5,11 @@
     body {
         margin: 0;
     }
-    .headerBar {
+
+    .outerHeader {
         background-color: #303030;
-        margin: 0 0;
         height: 60px;
-		color: white;
+        color: white;
     }
 
     .dark_mode {
@@ -24,6 +24,13 @@
         height: 70%;
         color: white;
         font-size: 18;
+        
+    .headerBar {
+        display: flex;
+        justify-content: space-between;    
+        margin: 0 auto;
+        max-width: 60%;
+        padding-top: 7px;
     }
 
     </style>
@@ -34,6 +41,11 @@
     <div class="headerBar">
         <img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo">
         <button class="dark_mode">Dark Mode</button>
+    <div class="outerHeader">
+        <div class="headerBar">
+            <a href="{{url_for('task_list.index')}}"><img src="{{url_for('static', filename='images/Clashroom_Logo.png')}}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
+        </div>
     </div>
 
     <center>
