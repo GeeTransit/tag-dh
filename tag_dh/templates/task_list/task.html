@@ -26,26 +26,27 @@
 
 <!-- filtering is done inside task_list.task -->
 <h3>All Submissions</h3>
-<table>
-    {% for submission in submissions %}
-    {% if atleast("teacher") or submission.account == getaccount() %}
-    <tr>
-        <td>{{ submission['text'] }}</td>
-        {% if submission.percent_mark != None %}
-        <td>{{ submission.percent_mark ~ '%' }}</td>
-        {% else %}
-        <td>Unmarked</td>
+<center>
+    <table>
+        {% for submission in submissions %}
+        {% if atleast("teacher") or submission.account == getaccount() %}
+        <tr>
+            <td>{{ submission['text'] }}</td>
+            {% if submission.percent_mark != None %}
+            <td>{{ submission.percent_mark ~ '%' }}</td>
+            {% else %}
+            <td>Unmarked</td>
+            {% endif %}
+            
+            <!-- Submission View -->
+            <td>
+                <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
         {% endif %}
-        
-        <!-- Submission View -->
-        <td>
-            <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
-                <button type="submit">View</button>
-            </form>
-        </td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-</table>
-
+        {% endfor %}
+    </table>
+</center>
 {% endblock %}
