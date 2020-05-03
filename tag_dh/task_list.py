@@ -3,7 +3,7 @@ from flask import (
 )
 
 from tag_dh import db
-from tag_dh.models import Task, Account
+from tag_dh.models import *
 
 bp = Blueprint('task_list', __name__)
 
