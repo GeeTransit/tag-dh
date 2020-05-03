@@ -59,9 +59,9 @@ class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Text, nullable=False)
     pwrd = db.Column(db.Text, nullable=False)
-
-    posts = db.relationship("PostAccountLink", back_populates="account")
-    clashes = db.relationship("ClashAccountLink", back_populates="account")
+    team_id = db.Column(Team, ForeignKey("Team.id"))  # can be None (teamless)
+    team = db.relationship("Team", back_populates="members")
+    badges = db.Column(db.Text)
 
     def __repr__(self):
         return f'<Account: id={self.id!r} user={self.user!r}>'
