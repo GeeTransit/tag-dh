@@ -26,8 +26,9 @@
 
 <!-- filtering is done inside task_list.task -->
 <h3>All Submissions</h3>
-<center>
+
     <table>
+    <center>
         {% for submission in submissions %}
         {% if atleast("teacher") or submission.account == getaccount() %}
         <tr>
@@ -47,6 +48,7 @@
         </tr>
         {% endif %}
         {% endfor %}
+    </center>
     </table>
-</center>
+
 {% endblock %}
