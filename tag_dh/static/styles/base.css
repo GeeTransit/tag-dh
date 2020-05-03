@@ -74,12 +74,12 @@ button {
     margin: 8px 8px 8px 8px;
     border: none;
     cursor: pointer;
-    width: 30%;
+    min-width: 30%;
 }
 
 .task {
     width: 70%;
-    max-width: 400px;
+    max-width: 90%;
     word-wrap: break-word;
     padding-left: 50px;
 }
@@ -87,4 +87,11 @@ button {
 .delete {
     width: 100%;
     max-width: 100px;
+}
+
+.content {
+	width: 60%;
+}
+center {
+	width: 100%;
 }
