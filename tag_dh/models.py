@@ -73,7 +73,7 @@ class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Text, nullable=False)
     pwrd = db.Column(db.Text, nullable=False)
-    team_id = db.Column(Team, ForeignKey("Team.id"))  # can be None (teamless)
+    team_id = db.Column(Team, db.ForeignKey("Team.id"))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
     badges = db.Column(db.Text)
 
