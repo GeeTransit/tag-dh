@@ -22,15 +22,17 @@
     }
 
     .dark_mode {
+        padding: 8px 8px 8px 8px;
         cursor: pointer;
         background-color: #A2A2A2;
         color: white;
         font-size: 90%; 
-        width: 150px;
+        width: 125px;
     }
 
     .logout {
-        width: 90px;
+        padding: 8px 8px 8px 8px;
+        width: 125px;
     }
 
     input[type=text],
