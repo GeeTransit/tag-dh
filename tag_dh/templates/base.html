@@ -3,10 +3,13 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
 </head>
+
 <body>
-    <div class="headerBar">
-        <img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo">
-        <button class="dark_mode">Dark Mode</button>
+    <div class="outerHeader">
+        <div class="headerBar">
+            <a href=" {{url_for('task_list.index')}} "><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
+        </div>
     </div>
 
     <center>
