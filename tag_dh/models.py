@@ -1,6 +1,8 @@
 from tag_dh import db
 
 class Team(db.Model):
+    __tablename__ = 'team'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
     health = db.Column(db.Integer, nullable=False)
@@ -9,9 +11,10 @@ class Team(db.Model):
 
 
 class Submission(db.Model):
+    __tablename__ = 'submission'
+
     id = db.Column(db.Integer, primary_key=True)
     percent_mark = db.Column(db.Integer)  # null = unmarked
-    percent_mark = db.Column(db.Integer, nullable=False)
     
     task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
     task = db.relationship("Task", back_populates="submissions")
@@ -24,12 +27,12 @@ class Task(db.Model):
     __tablename__ = 'task'
 
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.Text, nullable=False)
+    name = db.Column(db.Text, nullable=False)
 
     submissions = db.relationship("Submission", back_populates="task")
 
     def __repr__(self):
-        return f'<Task: {self.text}>'
+        return f'<Task: {self.name}>'
 
 
 # Links between Post, Clash, and Account
@@ -80,7 +83,7 @@ class Account(db.Model):
     pwrd = db.Column(db.Text, nullable=False)
     badges = db.Column(db.Text)
     
-    team_id = db.Column("Team", db.ForeignKey("team.id"))  # can be None (teamless)
+    team_id = db.Column(db.Integer, db.ForeignKey("team.id"))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
 
     def __repr__(self):
