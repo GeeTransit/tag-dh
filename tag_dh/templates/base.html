@@ -1,43 +1,16 @@
 <!DOCTYPE HTML>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <style> 
-    body {
-        margin: 0;
-    }
-    .headerBar {
-        background-color: #303030;
-        margin: 0 0;
-        height: 60px;
-		color: white;
-    }
-
-    .dark_mode {
-        float: right;
-        cursor: pointer;
-        padding: 3px 0px;
-        background-color: #A2A2A2;
-        margin: 8px 0;
-        margin-right: 60px;
-        border: none;
-        width: 5%;
-        height: 70%;
-        color: white;
-        font-size: 18;
-    }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
+</head>
 <body>
     <div class="headerBar">
-        <img src="{{url_for('static', filename='Clashroom_Logo.png')}}" alt="Clashroom logo">
+        <img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo">
         <button class="dark_mode">Dark Mode</button>
     </div>
 
-    <div>
-        {% block header %}{% endblock %}
-    </div>
     <center>
+        {% block header %}{% endblock %}
         {% for message in get_flashed_messages() %}
             <p>{{ message }}</p>
         {% endfor %}
