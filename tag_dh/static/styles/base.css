@@ -1,68 +1,75 @@
-    html {
-        overflow-x: hidden;
-    }
-    body {
-        margin: 0;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
+html {
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
-    .header {
-        background-color: #303030;
-        width: 100%;
-    }
+.header {
+    background-color: #303030;
+    width: 100%;
+}
 
-    .left {
-        padding-left: 20%;
-        padding-right: 40%
-    }
+.left {
+    padding-left: 20%;
+    padding-right: 40%
+}
 
-    .right {
-        padding-left: 60%;
-        padding-right: 20%;
-    }
+.right {
+    padding-left: 60%;
+    padding-right: 20%;
+}
 
-    .dark_mode {
-        cursor: pointer;
-        background-color: #A2A2A2;
-        color: white;
-        font-size: 90%; 
-        width: 70px;
-    }
+.dark_mode {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 8px 8px 8px 8px;
+    cursor: pointer;
+    background-color: #A2A2A2;
+    color: white;
+    font-size: 90%; 
+    width: 125px;
+}
 
-    .logout {
-        width: 90px;
-    }
+.logout {
+    display: inline-block;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 8px 8px 8px 8px;
+    width: 125px;
+}
 
-    input[type=text],
-    input[type=password] {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
+input[type=text],
+input[type=password] {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
 
-    button {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        background-color: rgb(180, 52, 52);
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 8px 0px 8px;
-        border: none;
-        cursor: pointer;
-        width: 30%;
-    }
-    
-    .task {
-        width: 70%;
-        max-width: 400px;
-        word-wrap: break-word;
-        padding-left: 50px;
-    }
+button {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(180, 52, 52);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px 8px 8px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+}
 
-    .delete {
-        width: 100%;
-        max-width: 100px;
-    }
+.task {
+    width: 70%;
+    max-width: 400px;
+    word-wrap: break-word;
+    padding-left: 50px;
+}
+
+.delete {
+    width: 100%;
+    max-width: 100px;
+}

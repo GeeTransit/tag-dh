@@ -3,26 +3,110 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
 </head>
+<style>
+        html {
+        overflow-x: hidden;
+    }
+    body {
+        margin: 0;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
 
+    .header {
+        background-color: #303030;
+        width: 100%;
+    }
+
+    .left {
+        padding-left: 20%;
+        padding-right: 40%
+    }
+
+    .right {
+        padding-left: 60%;
+        padding-right: 20%;
+    }
+
+    .dark_mode {
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 8px 8px 8px 8px;
+        cursor: pointer;
+        background-color: #A2A2A2;
+        color: white;
+        font-size: 90%; 
+        width: 125px;
+    }
+
+    .logout {
+        display: inline-block;
+        box-sizing: border-box;
+        cursor: pointer;
+        padding: 8px 8px 8px 8px;
+        width: 125px;
+    }
+
+    input[type=text],
+    input[type=password] {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color: rgb(180, 52, 52);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 8px 8px 8px;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+    }
+    
+    .task {
+        width: 70%;
+        max-width: 400px;
+        word-wrap: break-word;
+        padding-left: 50px;
+    }
+
+    .delete {
+        width: 100%;
+        max-width: 100px;
+    }
+
+</style>
 <body>
-    <table class="header"> <tbody>
-        <tr>
-
-        <td class="left">
-        <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-        </td>
-
-        <td class="right">
-        <table> <tbody> <tr>
-        <td> <button class="dark_mode">Dark Mode</button> </td>
-        <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
+    <div class="header">
+        <form action="{{ url_for('task_list.logout') }}" method="GET">
+            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
             <button type="submit" class="logout">Logout</button>
-        </form> </td>
-        </tr> </tbody> </table>
-        </td>
+        </form>
+        <!-- <table class="temp"> <tbody>
+            <tr>
 
-        </tr>
-    <tbody> </table>
+            <td class="left">
+            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            </td>
+
+            <td class="right">
+            <table> <tbody> <tr>
+            <td> <button class="dark_mode">Dark Mode</button> </td>
+            <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
+                <button type="submit" class="logout">Logout</button>
+            </form> </td>
+            </tr> </tbody> </table>
+            </td>
+
+            </tr>
+        <tbody> </table> -->
+    </div>
 
     <center>
     <div>
