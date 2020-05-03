@@ -8,9 +8,9 @@
 </style>
 <body>
     <div class="header">
-        <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-        <button class="dark_mode">Dark Mode</button>
         <form action="{{ url_for('task_list.logout') }}" method="GET">
+            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
             <button type="submit" class="logout">Logout</button>
         </form>
         <!-- <table class="temp"> <tbody>
