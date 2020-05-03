@@ -1,14 +1,47 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block header %}
 <h1 style="text-align:center">{% block title %}Login{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
+
+<style>
+    body {
+        font-family: "Lucida Sans";
+    }
+
+    input[type=text],
+    input[type=password] {
+        font-family: "Lucida Sans";
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        font-family: "Lucida Sans";
+        background-color: rgb(180, 52, 52);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 15%;
+    }
+
+</style>
+
 <form method="POST">
-    <input type="text" placeholder="Username" name="username" required>
-    <input type="password" placeholder="Password" name="password" required>
-    <button type="submit">Enter</button>
+    <center>
+        <input type="text" placeholder="Username" name="username" required></br>
+        <input type="password" placeholder="Password" name="password" required></br>
+        <button type="submit">Enter</button>
+        <button type="button" onclick=location.href="{{ url_for('task_list.signup') }}">Sign up</button>
+    </center>
 </form>
-<p>Alternatively, you can <a href="{{ url_for('task_list.signup') }}">sign up</a> for an account.</p>
+<!-- <span class="psw">Alternatively, you can <a href="{{ url_for("task_list.signup") }}">sign up</a> for an account.</span> -->
 {% endblock %}

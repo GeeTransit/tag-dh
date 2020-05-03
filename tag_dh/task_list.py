@@ -37,7 +37,7 @@ def signup():
             db.session.add(Account(user=username, pwrd=password))
             db.session.commit()
             flash("Account successfully created")
-            return redirect(url_for('task_list.login'))
+            return redirect(url_for('task_list.index'))
 
     return render_template('task_list/signup.html')
 
@@ -49,13 +49,14 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if username != "teacher" or password != "generic":
-            flash("Incorrect username / password.")
+        if Account.query.filter_by(user=username).filter_by(pwrd=password).first() == None:
+            flash("Incorrect username or password")
             return redirect(url_for('task_list.login'))
         else:
             session['validUser'] = True
+            session['username'] = username
             return redirect(url_for('task_list.index'))
-    
+
     return render_template('task_list/login.html')
 
 @bp.route('/logout', methods=('GET','POST'))
