@@ -12,6 +12,7 @@ class Task(db.Model):
 
 # Links between Post, Clash, and Account
 
+'''   unused
 class PostClashLink(db.Model):
     __tablename__ = 'postclashlink'
 
@@ -38,7 +39,7 @@ class ClashAccountLink(db.Model):
     relationType = db.Column(db.String(24))
     clash = db.relationship("Clash", back_populates="accounts")
     account = db.relationship("Account", back_populates="clashes")
-
+'''
 
 class Post(db.Model):
     __tablename__ = "post"
