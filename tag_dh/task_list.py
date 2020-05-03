@@ -7,6 +7,11 @@ from tag_dh.models import Task, Account
 
 bp = Blueprint('task_list', __name__)
 
+
+@bp.route('/student', methods=('GET',))
+def student():
+    return render_template('task_list/student.html')
+
 @bp.route('/tasks', methods=('GET', 'POST'))
 def index():
     if not session.get('validUser', False):
