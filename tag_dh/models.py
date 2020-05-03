@@ -11,6 +11,7 @@ class Team(db.Model):
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     percent_mark = db.Column(db.Integer)  # null = unmarked
+    percent_mark = db.Column(db.Integer, nullable=False)
     
     task_id = db.Column(db.Integer, ForeignKey('task.id'))
     task = db.relationship("Task", back_populates="submissions")
