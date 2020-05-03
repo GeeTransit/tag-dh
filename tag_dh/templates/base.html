@@ -28,16 +28,16 @@
 
     </style>
 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
+</head>
 <body>
     <div class="headerBar">
-        <img src="{{url_for('static', filename='Clashroom_Logo.png')}}" alt="Clashroom logo">
+        <img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo">
         <button class="dark_mode">Dark Mode</button>
     </div>
 
-    <div>
-        {% block header %}{% endblock %}
-    </div>
     <center>
+        {% block header %}{% endblock %}
         {% for message in get_flashed_messages() %}
             <p style="color: rgb(42, 42, 42);">{{ message }}</p>
         {% endfor %}
