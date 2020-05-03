@@ -58,7 +58,6 @@ body {
 input[type=text],
 input[type=password] {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -74,12 +73,9 @@ button {
     margin: 8px 8px 8px 8px;
     border: none;
     cursor: pointer;
-    min-width: 30%;
 }
 
 .task {
-    width: 70%;
-    max-width: 90%;
     word-wrap: break-word;
     padding-left: 50px;
 }
