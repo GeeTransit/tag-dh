@@ -11,7 +11,7 @@ body {
     width: 100%;
 }
 
-.left {
+/* .left {
     padding-left: 20%;
     padding-right: 40%
 }
@@ -19,7 +19,7 @@ body {
 .right {
     padding-left: 60%;
     padding-right: 20%;
-}
+} */
 
 .dark_mode {
     display: inline-block;
