@@ -55,6 +55,7 @@
     .task {
         width: 70%;
         max-width: 400px;
+        word-wrap: break-word;
     }
 
     .delete {
