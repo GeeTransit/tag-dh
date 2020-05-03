@@ -18,7 +18,7 @@
         padding: 3px 0px;
         background-color: #A2A2A2;
         margin: 8px 0;
-        margin-right: 60px;
+        margin-right: 8px;
         border: none;
         width: 5%;
         height: 70%;
@@ -39,7 +39,7 @@
     </div>
     <center>
         {% for message in get_flashed_messages() %}
-            <p>{{ message }}</p>
+            <p style="color: rgb(42, 42, 42);">{{ message }}</p>
         {% endfor %}
         {% block content %}{% endblock %}
     </center>
