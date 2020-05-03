@@ -5,7 +5,7 @@ class Team(db.Model):
     name = db.Column(db.String(64), nullable=False)
     health = db.Column(db.Integer, nullable=False)
 
-    members = db.relationship("Account", back_populates="team")
+    members = db.relationship("Account")
 
 
 class Submission(db.Model):
@@ -80,7 +80,7 @@ class Account(db.Model):
     pwrd = db.Column(db.Text, nullable=False)
     badges = db.Column(db.Text)
     
-    team_id = db.Column("Team", db.ForeignKey("team.id"))  # can be None (teamless)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
 
     def __repr__(self):
