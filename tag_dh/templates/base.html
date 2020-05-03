@@ -2,41 +2,6 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
 
-    <style> 
-
-    body {
-        margin: 0;
-    }
-
-    .outerHeader {
-        background-color: #303030;
-        height: 60px;
-        color: white;
-    }
-
-    .headerBar {
-        display: flex;
-        justify-content: space-between;    
-        margin: 0 auto;
-        max-width: 60%;
-        padding-top: 7px;
-    }
-
-    .dark_mode {
-        float: right;
-        cursor: pointer;
-        padding: 3px 0px;
-        background-color: #A2A2A2;
-        margin: 8px 0;
-        margin-right: 8px;
-        border: none;
-        width: 5%;
-        height: 70%;
-        color: white;
-        font-size: 18;
-    }
-
-    </style>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
 </head>
 
