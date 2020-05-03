@@ -8,12 +8,12 @@
 
 <style>
     body {
-        font-family: "Lucida Sans";
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
     input[type=text],
     input[type=password] {
-        font-family: "Lucida Sans";
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         width: 30%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -23,14 +23,14 @@
     }
 
     button {
-        font-family: "Lucida Sans";
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background-color: rgb(180, 52, 52);
         color: white;
         padding: 14px 20px;
-        margin: 8px 0;
+        margin: 8px 8px 0px 8px;
         border: none;
         cursor: pointer;
-        width: 15%;
+        width: 30%;
     }
 
 </style>
@@ -40,7 +40,8 @@
         <input type="text" placeholder="Username" name="username" required></br>
         <input type="password" placeholder="Password" name="password" required></br>
         <button type="submit">Enter</button>
-        <button type="button" onclick=location.href="{{ url_for('task_list.signup') }}">Sign up</button>
+        <p>Or <a href="{{ url_for('task_list.signup') }}">sign up</a> for a new account.</p>
+        <!-- <button type="button" onclick=location.href="{{ url_for('task_list.signup') }}">Sign up</button> -->
     </center>
 </form>
 <!-- <span class="psw">Alternatively, you can <a href="{{ url_for("task_list.signup") }}">sign up</a> for an account.</span> -->

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1 style="text-align:center">{% block title %}Sign Up{% endblock %}</h1>
+<h1>{% block title %}Sign Up{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
         background-color: rgb(180, 52, 52);
         color: white;
         padding: 14px 20px;
-        margin: 8px 0;
+        margin: 8px 8px 0px 8px;
         border: none;
         cursor: pointer;
         width: 30%;
@@ -39,7 +39,7 @@
         <input type="password" placeholder="Password" name="password" required></br>
         <input type="password" placeholder="Re-enter Password" name="chk_password" required></br>
         <button type="submit">Create</button>
+        <p>Or <a href="{{ url_for('task_list.login') }}">log in</a> using an existing account.</p>
     </center>
     </form>
-<p>Alternatively, you can <a href="{{ url_for('task_list.login') }}">log in</a> using an existing account.</p>
 {% endblock %}

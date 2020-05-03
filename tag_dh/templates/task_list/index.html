@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1 style="text-align:center">{% block title %}Task List{% endblock %}</h1>
+<h1>{% block title %}Task List{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
 </form>
 
 <!-- New Task -->
-<h3 style="text-align:center">New Task</h3>
+<h3>New Task</h3>
 <form method="POST">
     <input type="text" placeholder="Task Name" name="name" required>
     <button type="submit">Add Task</button>
@@ -19,7 +19,7 @@
 
 <!-- Current Tasks -->
 {% if tasks %}
-<h3 style="text-align:center" class="card-title">Current Tasks</h3>
+<h3>Current Tasks</h3>
 <table>
     {% for task in tasks %}
     <tr>

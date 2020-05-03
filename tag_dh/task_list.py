@@ -7,6 +7,23 @@ from tag_dh.models import Task, Account
 
 bp = Blueprint('task_list', __name__)
 
+@bp.route('/tasks', methods=('GET', 'POST'))
+def index():
+    if not session.get('validUser', False):
+        return redirect(url_for('task_list.login'))
+
+    if request.method == 'POST':
+        name = request.form['name']
+        if not name:
+            flash('Task name is required.', username)
+        else:
+            db.session.add(Task(name=name))
+            db.session.commit()
+        return redirect(url_for('task_list.index'))
+
+    tasks = Task.query.all()
+    return render_template('task_list/index.html', tasks=tasks)
+
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
@@ -49,28 +66,10 @@ def logout():
     return redirect(url_for('task_list.login'))
 
 
-@bp.route('/', methods=('GET', 'POST'))
-def index():
-    if not session.get('validUser', False):
-        return redirect(url_for('task_list.login'))
-
-    if request.method == 'POST':
-        name = request.form['name']
-        if not name:
-            flash('Task name is required.', username)
-        else:
-            db.session.add(Task(name=name))
-            db.session.commit()
-        return redirect(url_for('task_list.index'))
-
-    tasks = Task.query.all()
-    return render_template('task_list/index.html', tasks=tasks)
-
-
-@bp.route('/<int:id>/delete', methods=('POST',))
+@bp.route('/tasks/<int:id>/delete', methods=('POST',))
 def delete(id):
     task = Task.query.get(id)
-    if task != None:
+    if task is not None:
         db.session.delete(task)
         db.session.commit()
     return redirect(url_for('task_list.index'))
