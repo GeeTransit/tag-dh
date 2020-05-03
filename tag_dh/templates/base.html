@@ -7,19 +7,19 @@
 
 </style>
 <body>
-    <div class="header" height="100%" style="display: flex">
+    <div class="header" style="display: flex" align-items: center>
         <div style="margin-right: auto">
             <form action="{{ url_for('task_list.index') }}" method="GET">
                 <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
             </form>
         </div>
 
-        <div height="100%">
+        <div>
             <form style="margin-right: auto" action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
                 <button style="float: right;" class="dark_mode">Dark Mode</button>
             </form>
         </div>
-        <div height="100%">
+        <div>
             <form style="margin-right: auto" action="{{ url_for('task_list.logout') }}" method="GET">
                 <button style="float: right;" type="submit" class="logout">Logout</button>
             </form>
