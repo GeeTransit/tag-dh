@@ -3,14 +3,14 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
 </head>
-<!-- inline style moved to base.css -->
+<style>
+    
+</style>
 <body>
     <div class="header">
-        <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-        <form action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
-            <button type="submit" class="dark_mode">Dark Mode</button>
-        </form>
         <form action="{{ url_for('task_list.logout') }}" method="GET">
+            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
             <button type="submit" class="logout">Logout</button>
         </form>
         <!-- <table class="temp"> <tbody>
