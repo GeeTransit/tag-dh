@@ -28,7 +28,7 @@ class Task(db.Model):
     __tablename__ = 'task'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
+    name = db.Column(db.Text, nullable=True)
 
     submissions = db.relationship("Submission", back_populates="task")
 
@@ -82,7 +82,7 @@ class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Text, nullable=False)
     pwrd = db.Column(db.Text, nullable=False)
-    badges = db.Column(db.Text)
+    badges = db.Column(db.Text, nullable=True)
     
     team_id = db.Column(db.Integer, db.ForeignKey("team.id"))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
