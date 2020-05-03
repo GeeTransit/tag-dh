@@ -80,7 +80,7 @@ class Account(db.Model):
     pwrd = db.Column(db.Text, nullable=False)
     badges = db.Column(db.Text)
     
-    team_id = db.Column(Team, db.ForeignKey("team.id"))  # can be None (teamless)
+    team_id = db.Column("Team", db.ForeignKey("team.id"))  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
 
     def __repr__(self):
