@@ -7,7 +7,7 @@
 <body>
     <div class="outerHeader">
         <div class="headerBar">
-            <a href=" {{url_for('task_list.index')}} "><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <a href="{{ url_for('task_list.index') }}"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
             <button class="dark_mode">Dark Mode</button>
         </div>
     </div>
@@ -17,7 +17,7 @@
     </div>
     <center>
         {% for message in get_flashed_messages() %}
-            <p style="color: rgb(42, 42, 42);">{{ message }}</p>
+            <p class="alert">{{ message }}</p>
         {% endfor %}
         {% block content %}{% endblock %}
     </center>
