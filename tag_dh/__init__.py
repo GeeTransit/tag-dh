@@ -8,6 +8,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+    print(app.instance_path)
     app.config.from_mapping(
         SECRET_KEY = os.environ.get('SECRET_KEY', 'dev_key'),
         SQLALCHEMY_DATABASE_URI = os.environ.get(
@@ -19,10 +20,12 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
-
     from . import models
+
     from . import task_list
+    from . import clash
     app.register_blueprint(task_list.bp)
+    app.register_blueprint(clash.bp)
 
     return app
 

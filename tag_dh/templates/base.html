@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
 <title>{% block title %}{% endblock %}</title>
 
-<section>
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    <center>
-        {% for message in get_flashed_messages() %}
-            <p>{{ message }}</p>
-        {% endfor %}
-        {% block content %}{% endblock %}
-    </center>
-</section>
+<header>
+    <center>{% block header %}{% endblock %}<center>
+</header>
+<center>
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</center>
