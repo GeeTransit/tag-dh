@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
 <html>
     <style>
         /* Set height of body and the document to 100% to enable "full page tabs" */
@@ -96,5 +98,4 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 </script>
-
-</html>
+{% endblock %}
