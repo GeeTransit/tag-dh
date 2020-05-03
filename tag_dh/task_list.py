@@ -79,7 +79,7 @@ def tasks():
         return redirect(url_for('task_list.task', id=task.id))
 
 
-@bp.route('/tasks/<int:id>', methods=["GET", "POST", "DELETE"])
+@bp.route('/tasks/<int:id>', methods=["GET", "POST"])
 def task(id):
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
@@ -102,12 +102,19 @@ def task(id):
         db.session.commit()
         return redirect(url_for('task_list.submission', id=submission.id))
 
-    # need teacher for delete
+@bp.route('/tasks/<int:id>/delete', methods=["POST"])
+def taskdelete(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    task = Task.query.get(id)
+    account = getaccount()
+    
     if not atleast("teacher"):
         flash("You don't have enough permissions to remove tasks")
         return redirect(url_for('task_list.task', id=id))
     
-    if request.method == "DELETE":
+    if request.method == "POST":
         if task is not None:
             db.session.delete(task)
             db.session.commit()
@@ -145,8 +152,21 @@ def submission(id):
         submission.percent_mark = mark
         db.session.commit()
         return redirect(url_for('task_list.submission', id=id))
+
+@bp.route('/submission/<int:id>/delete', methods=["POST"])
+def submissiondelete(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    submission = Submission.query.get(id)
+    task = Task.query.get(submission.task.id)
+    account = Account.query.get(submission.account.id)
     
-    if request.method == "DELETE":
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify tasks")
+        return redirect(url_for('task_list.submission', id=id))
+    
+    if request.method == "POST":
         if submission is not None:
             db.session.delete(submission)
             db.session.commit()
@@ -180,7 +200,7 @@ def teams():
         db.session.commit()
         return redirect(url_for('task_list.team', id=team.id))
 
-@bp.route('/teams/<int:id>', methods=["GET", "POST", "DELETE"])
+@bp.route('/teams/<int:id>', methods=["GET", "POST"])
 def team(id):
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
@@ -211,8 +231,20 @@ def team(id):
         team.health = health
         db.session.commit()
         return redirect(url_for('task_list.team', id=id))
+
+@bp.route('/teams/<int:id>/delete', methods=["POST"])
+def teamdelete(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    team = Team.query.get(id)
+    account = getaccount()
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify teams")
+        return redirect(url_for('task_list.team', id=id))
     
-    if request.method == "DELETE":
+    if request.method == "POST":
         if team is not None:
             db.session.delete(team)
             db.session.commit()
@@ -264,11 +296,18 @@ def profile(id):
         db.session.commit()
         return redirect(url_for('task_list.profile', id=id))
 
+@bp.route('/profile/<int:id>/delete', methods=["POST"])
+def profiledelete(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+    
+    account = Account.query.get(id)
+
     if not atleast("admin"):
         flash("You don't have enough permissions to modify accounts")
         return redirect(url_for('task_list.profile', id=id))
     
-    if request.method == "DELETE":
+    if request.method == "POST":
         db.session.delete(account)
         db.session.commit()
         return redirect(url_for('task_list.profiles'))

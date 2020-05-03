@@ -13,7 +13,7 @@
 </form>
 
 {% if atleast("teacher") %}
-<form method="DELETE">
+<form aciton="{{ url_for('task_list.submissiondelete', id=id) }}" method="POST">
     <button type="submit">Delete</button>
 </form>
 

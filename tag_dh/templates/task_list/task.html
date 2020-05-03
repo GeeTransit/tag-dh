@@ -10,7 +10,7 @@
 </form>
 
 {% if atleast("teacher") %}
-<form method="DELETE">
+<form action="{{ url_for('task_list.taskdelete', id=id) }}" method="POST">
     <button type="submit">Delete</button>
 </form>
 {% endif %}
