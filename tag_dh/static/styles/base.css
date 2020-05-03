@@ -10,7 +10,7 @@ body {
 }
 
 .header {
-    max-width: 60%;
+    max-width: 80%;
 	min-height: 50px;
 	margin: 0 auto;
 	padding: .6rem .6rem;
@@ -49,13 +49,13 @@ body {
     color: white;
     font-size: 90%; 
     width: 125px;
+    height: 50px;
 }
 
 .logout {
-    display: inline-block;
-    box-sizing: border-box;
-    cursor: pointer;
+    font-size: 90%; 
     width: 125px;
+    height: 50px;
 }
 
 input[type=text],
