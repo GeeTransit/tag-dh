@@ -1,65 +1,51 @@
 <!DOCTYPE html>
 <html>
-<style>
-    /* Set height of body and the document to 100% to enable "full page tabs" */
-    body,
-    html {
-        height: 100%;
-        margin: 0;
-        font-family: Arial;
-    }
-
-    /* Style tab links */
-    .tablink {
-        background-color: rgb(242, 242, 242);
-        color: black;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        font-size: 17px;
-        width: 33.33333333333%;
-    }
-
-    .tablink:hover {
-        background-color: rgb(255, 190, 190);
-    }
-
-    /* Style the tab content (and add height:100% for full page content) */
-    .tabcontent {
-        color: black;
-        display: none;
-        padding: 100px 20px;
-        height: 100%;
-    }
-
-    /* #Teams {
-            background-color: white;
+    <style>
+        /* Set height of body and the document to 100% to enable "full page tabs" */
+        body,
+        html {
+            height: 90%;
+            margin: 0;
+            font-family: "Lucida Sans";
         }
-
-        #News {
-            background-color: white;
+    
+        /* Style tab links */
+        .tablink {
+            font: "Ludida Sans";
+            /* bottom: 0; */
+            background-color: rgb(48, 48, 48);
+            color: rgb(255, 255, 255);
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            height: 60px;
+            width: 33.33333333%;
+            /* max-width: 60%; */
         }
-
-        #Assignments {
-            background-color: white;
+    
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: black;
+            display: none;
+            /* first value of the padding dterminged the distance form the top*/
+            padding: 0px 20px;
+            height: 100%;
         }
-
-        #Profile {
-            background-color: white;
-        } */
-</style>
-
+    
+    </style>
+    
 <body>
-    <button class="tablink" onclick="openPage('Teams', this, 'rgb(220,53,69)')">Manage Teams</button>
-    <button class="tablink" onclick="openPage('Assignments', this, 'rgb(220,53,69)')">Create Assignment</button>
-    <button class="tablink" onclick="openPage('Profile', this, 'rgb(220,53,69)')" id="defaultOpen">Profile</button>
+    <button style="position: absolute; bottom: 0%;" class="tablink" onclick="openPage('Teams', this, 'rgb(220,53,69)')">Manage Teams</button>
+    <button style="position: absolute; left: 33.33333%; bottom: 0%;" class="tablink" onclick="openPage('Assignments', this, 'rgb(220,53,69)')">Create Assignment</button>
+    <button style="position: absolute; left: 66.66666%; bottom: 0%;" class="tablink" onclick="openPage('Profile', this, 'rgb(220,53,69)')" id="defaultOpen">Profile</button>
 
     <div id="Teams" class="tabcontent">
         <center>
-            <h3>Teams</h3>
-            <p>Teacher can view individual teams and make teams</p>
+            <h3>Manage Teams</h3>
+            <p>Teacher can view individual teams and make teams, and delete teams</p>
         </center>
     </div>
 
@@ -72,7 +58,7 @@
 
     <div id="Profile" class="tabcontent">
         <center>
-            <h3>Profile</h3>
+            <h3 >Profile</h3>
             <p>Teacher Name</p>
             <p>See list of teams: </br>team abc </br>team def </br>team ghi </p>
             <p>ability to give them students stars, badges, and marks</p>
