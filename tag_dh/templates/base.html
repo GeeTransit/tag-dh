@@ -1,31 +1,13 @@
 <!DOCTYPE HTML>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <style> 
-    body {
-        margin: 0;
-    }
-
-    .outerHeader {
-        background-color: #303030;
-        height: 60px;
-        color: white;
-    }
-
-    .headerBar {
-        display: flex;
-        justify-content: space-between;    
-        margin: 0 auto;
-        max-width: 60%;
-        padding-top: 7px;
-    }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
+</head>
 
 <body>
     <div class="outerHeader">
         <div class="headerBar">
-            <a href="{{url_for('task_list.index')}}"><img src="{{url_for('static', filename='images/Clashroom_Logo.png')}}" alt="Clashroom logo" class="logo"></a>
+            <a href=" {{url_for('task_list.index')}} "><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
             <button class="dark_mode">Dark Mode</button>
         </div>
     </div>
