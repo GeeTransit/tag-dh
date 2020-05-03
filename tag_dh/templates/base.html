@@ -17,7 +17,7 @@
     </div>
     <center>
         {% for message in get_flashed_messages() %}
-            <p>{{ message }}</p>
+            <p style="color: rgb(42, 42, 42);">{{ message }}</p>
         {% endfor %}
         {% block content %}{% endblock %}
     </center>
