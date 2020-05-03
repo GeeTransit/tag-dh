@@ -21,3 +21,7 @@ body {
     color: white;
     font-size: 18;
 }
+
+.alert {
+	color: rgb(42, 42, 42);
+}

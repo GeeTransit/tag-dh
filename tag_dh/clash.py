@@ -7,7 +7,10 @@ from tag_dh.models import Account, Clash, Post
 
 bp = Blueprint('clash', __name__)
 
-@bp.route('/', methods=['GET'])
 @bp.route("/clashes", methods=["GET"])
 def index():
     return render_template('clashes/index.html')
+
+@bp.route('/', methods=['GET'])
+def mainindex():
+    return redirect(url_for("task_list.index"))
