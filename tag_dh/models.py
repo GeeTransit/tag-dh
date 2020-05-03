@@ -68,11 +68,11 @@ class Account(db.Model):
     __tablename__ = 'account'
 
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Text, nullable=False)
-    pwrd = db.Column(db.Text, nullable=False)
+    username = db.Column(db.Text, nullable=False)
+    password = db.Column(db.Text, nullable=False)
 
     posts = db.relationship("PostAccountLink", back_populates="account")
     clashes = db.relationship("ClashAccountLink", back_populates="account")
 
     def __repr__(self):
-        return f'<Account: id={self.id!r} user={self.user!r}>'
+        return f'<Account: id={self.id!r} username={self.username!r}>'

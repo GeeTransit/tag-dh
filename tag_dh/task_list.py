@@ -47,14 +47,14 @@ def signup():
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
-    if session.get("validUser"):
+    if session.get("account"):
         return redirect(url_for(request.args.get("next", "task_list.index")))
 
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         
-        account = Account.query.filter_by(user=username).filter_by(pwrd=password).first()
+        account = Account.query.filter(Account.username == username).filter(Account.password == password).first()
         if account is None:
             flash("Incorrect username or password")
             return redirect(url_for('task_list.login', **request.args))
