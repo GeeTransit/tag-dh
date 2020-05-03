@@ -4,15 +4,17 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
 </head>
 <style>
-    
+
 </style>
 <body>
     <div class="header">
-        <form action="{{ url_for('task_list.logout') }}" method="GET">
-            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-            <button class="dark_mode">Dark Mode</button>
-            <button type="submit" class="logout">Logout</button>
-        </form>
+        <center>
+            <form action="{{ url_for('task_list.logout') }}" method="GET">
+                <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+                <button style="float: right;" class="dark_mode">Dark Mode</button>
+                <button style="float: right;" type="submit" class="logout">Logout</button>
+            </form>
+        </center>
         <!-- <table class="temp"> <tbody>
             <tr>
 
