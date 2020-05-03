@@ -2,26 +2,33 @@ from tag_dh import db
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    members = relationship("Account")
     name = db.Column(db.String(64), nullable=False)
     health = db.Column(db.Integer, nullable=False)
 
+    members = db.relationship("Account", back_populates="team")
+
+
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task = db.relationship("Task", uselist=False, back_populates="")
-    percent_mark = db.relationship(db.Integer, nullable=False)
+    percent_mark = db.Column(db.Integer)  # null = unmarked
     
+    task_id = db.Column(db.Integer, ForeignKey('task.id'))
+    task = db.relationship("Task", back_populates="submissions")
+
+    def __repr__(self):
+        return f'<Submission: id={self.id!r} percent_mark={self.percent_mark!r}>'
+
 
 class Task(db.Model):
     __tablename__ = 'task'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    task_id = db.Column(db.Integer, ForeignKey('submission.id')
-    submission = db.relationship("Submission", back_populates=task)
+    text = db.Column(db.Text, nullable=False)
+
+    submissions = db.relationship("Submission", back_populates="task")
 
     def __repr__(self):
-        return f'<Task: {self.name}>'
+        return f'<Task: {self.text}>'
 
 
 # Links between Post, Clash, and Account
@@ -61,9 +68,6 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
 
-    clashes = db.relationship("PostClashLink", back_populates="post")
-    accounts = db.relationship("PostAccountLink", back_populates="post")
-
     def __repr__(self):
         return f'<Post: id={self.id!r}>'
 
@@ -73,13 +77,15 @@ class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Text, nullable=False)
     pwrd = db.Column(db.Text, nullable=False)
-    team_id = db.Column(Team, ForeignKey("Team.id"))  # can be None (teamless)
-    team = db.relationship("Team", back_populates="members")
     badges = db.Column(db.Text)
+    
+    team_id = db.Column(Team, ForeignKey("team.id"))  # can be None (teamless)
+    team = db.relationship("Team", back_populates="members")
 
     def __repr__(self):
         return f'<Account: id={self.id!r} user={self.user!r}>'
 
+'''
 class Clash(db.Model):
     __tablename__ = 'clash'
 
@@ -91,3 +97,4 @@ class Clash(db.Model):
 
     def __repr__(self):
         return f'<Clash: id={self.id!r} name={self.name!r}>'
+'''
