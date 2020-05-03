@@ -47,7 +47,7 @@
 {% endif %}
 
 {% if atleast("admin") %}
-<form aciton="{{ url_for('task_list.profiledelete', id=id) }}" method="POST">
+<form action="{{ url_for('task_list.profiledelete', id=id) }}" method="POST">
     <button type="submit">Remove User</button>
 </form>
 {% endif %}

@@ -284,7 +284,7 @@ def profile(id):
             badges = []
         else:
             badges = badges.split()
-        return render_template('task_list/profile.html', account=account, badges=badges)
+        return render_template('task_list/profile.html', id=id, account=account, badges=badges)
 
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify badges")
