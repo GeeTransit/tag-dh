@@ -33,6 +33,10 @@ body {
     padding-right: 20%;
 } */
 
+.view_button {
+	width: 300%;
+}
+
 .controls {
 	float: right;
 }

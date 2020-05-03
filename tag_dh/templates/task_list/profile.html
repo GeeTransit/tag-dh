@@ -37,7 +37,7 @@
         {% endif %}
 
         <td>
-            <form action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
+            <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
                 <button type="submit">View</button>
             </form>
         </td>
