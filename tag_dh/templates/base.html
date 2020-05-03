@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+<<<<<<< HEAD
+    <style> 
+    body {
+        margin: 0;
+    }
+
+    .outerHeader {
+        background-color: #303030;
+        height: 60px;
+        color: white;
+    }
+
+<<<<<<< HEAD
+    .headerBar {
+        display: flex;
+        justify-content: space-between;    
+        margin: 0 auto;
+        max-width: 60%;
+        padding-top: 7px;
+=======
+    .dark_mode {
+        float: right;
+        cursor: pointer;
+        padding: 3px 0px;
+        background-color: #A2A2A2;
+        margin: 8px 0;
+        margin-right: 8px;
+        border: none;
+        width: 5%;
+        height: 70%;
+        color: white;
+        font-size: 18;
+>>>>>>> 4f424fe138f2442042458ec51b1dc848beeb629f
+    }
+
+    </style>
+
+=======
+>>>>>>> 286951d5a7ba5b927036f0540418664f3cb6376e
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}"/>
+</head>
+
+<body>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 286951d5a7ba5b927036f0540418664f3cb6376e
+    <div class="outerHeader">
+        <div class="headerBar">
+            <a href="{{ url_for('task_list.index') }}"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            <button class="dark_mode">Dark Mode</button>
+        </div>
+<<<<<<< HEAD
+=======
+    <div class="headerBar">
+        <img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo">
+        <button class="dark_mode">Dark Mode</button>
+>>>>>>> 4f424fe138f2442042458ec51b1dc848beeb629f
+=======
+>>>>>>> 286951d5a7ba5b927036f0540418664f3cb6376e
+    </div>
+
+    <div>
+        {% block header %}{% endblock %}
+    </div>
+    <center>
+        {% for message in get_flashed_messages() %}
+            <p class="alert">{{ message }}</p>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </center>
+</body>
