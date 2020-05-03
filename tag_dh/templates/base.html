@@ -7,24 +7,26 @@
     
 </style>
 <body>
-    <table class="header"> <tbody>
-        <tr>
+    <div class="header">
+        <table class="temp"> <tbody>
+            <tr>
 
-        <td class="left">
-        <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-        </td>
+            <td class="left">
+            <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+            </td>
 
-        <td class="right">
-        <table> <tbody> <tr>
-        <td> <button class="dark_mode">Dark Mode</button> </td>
-        <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
-            <button type="submit" class="logout">Logout</button>
-        </form> </td>
-        </tr> </tbody> </table>
-        </td>
+            <td class="right">
+            <table> <tbody> <tr>
+            <td> <button class="dark_mode">Dark Mode</button> </td>
+            <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
+                <button type="submit" class="logout">Logout</button>
+            </form> </td>
+            </tr> </tbody> </table>
+            </td>
 
-        </tr>
-    <tbody> </table>
+            </tr>
+        <tbody> </table>
+    </div>
 
     <center>
     <div>
