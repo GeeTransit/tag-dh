@@ -1,31 +1,61 @@
     body {
         margin: 0;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
-    .outerHeader {
+    .header {
         background-color: #303030;
-        height: 60px;
-        color: white;
+        width: 100%;
     }
 
-    .headerBar {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
-        max-width: 60%;
-        padding-top: 7px;
+    .left {
+        padding-left: 20%;
+        padding-right: 40%
+    }
+
+    .right {
+        padding-left: 60%;
+        padding-right: 20%;
     }
 
     .dark_mode {
-        float: right;
         cursor: pointer;
-        padding: 3px 0px;
         background-color: #A2A2A2;
-        border: none;
-        width: 5%;
-        height: 70%;
         color: white;
         font-size: 90%; 
+        width: 70px;
     }
 
+    .logout {
+        width: 90px;
+    }
 
+    input[type=text],
+    input[type=password] {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color: rgb(180, 52, 52);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 8px 0px 8px;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+    }
+    
+    .task {
+        width: 70%;
+    }
+
+    .delete {
+        width: 100%;
+    }

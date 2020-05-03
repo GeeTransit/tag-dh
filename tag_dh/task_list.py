@@ -36,6 +36,8 @@ def signup():
         else:
             db.session.add(Account(user=username, pwrd=password))
             db.session.commit()
+            session['validUser'] = True
+            session['username'] = username
             flash("Account successfully created")
             return redirect(url_for('task_list.index'))
 

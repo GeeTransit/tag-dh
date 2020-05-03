@@ -5,15 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<p>Hey there, {{session['username']}}</p>
-<form action="{{ url_for('task_list.logout') }}" method="GET">
-    <button type="submit">Logout</button>
-</form>
 
 <!-- New Task -->
 <h3>New Task</h3>
 <form method="POST">
     <input type="text" placeholder="Task Name" name="name" required>
+    <br>
     <button type="submit">Add Task</button>
 </form>
 
@@ -24,11 +21,11 @@
     {% for task in tasks %}
     <tr>
         <!-- Task Name -->
-        <td>{{ task['name'] }}</td>
+        <td class="task">{{ task['name'] }}</td>
         <!-- Delete Button -->
         <td>
             <form action="{{ url_for('task_list.delete', id=task['id']) }}" method="POST">
-                <button type="submit">Delete</button>
+                <button type="submit" class="delete">Delete</button>
             </form>
         </td>
     </tr>

@@ -6,13 +6,25 @@
 </head>
 
 <body>
-    <div class="outerHeader">
-        <div class="headerBar">
-            <a href="{{ url_for('task_list.index') }}"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
-            <button class="dark_mode">Dark Mode</button>
-        </div>
+    <table class="header"> <tbody>
+        <tr>
 
-    </div>
+        <td class="left">
+        <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
+        </td>
+
+        <td class="right">
+        <table> <tbody> <tr>
+        <td> <button class="dark_mode">Dark Mode</button> </td>
+        <td> <form action="{{ url_for('task_list.logout') }}" method="GET">
+            <button type="submit" class="logout">Logout</button>
+        </form> </td>
+        </tr> </tbody> </table>
+        </td>
+
+        </tr>
+    <tbody> </table>
+
     <center>
     <div>
         {% block header %}{% endblock %}
