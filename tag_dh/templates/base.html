@@ -8,17 +8,22 @@
 </style>
 <body>
     <div class="header" style="display: flex">
-        <div style="margin-right: auto">
+        <div style="margin-right: auto"  align-items: center>
             <form action="{{ url_for('task_list.index') }}" method="GET">
                 <a href="{{ url_for('task_list.index') }}" class="left"><img src="{{ url_for('static', filename='images/Clashroom_Logo.png') }}" alt="Clashroom logo" class="logo"></a>
             </form>
         </div>
-        <form style="margin-right: auto" action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
-            <button style="float: right;" class="dark_mode">Dark Mode</button>
-        </form>
-        <form style="margin-right: auto" action="{{ url_for('task_list.logout') }}" method="GET">
-            <button style="float: right;" type="submit" class="logout">Logout</button>
-        </form>
+
+        <div align-items: center>
+            <form style="margin-right: auto" action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
+                <button style="float: right;" class="dark_mode">Dark Mode</button>
+            </form>
+        </div>
+        <div align-items: center>
+            <form style="margin-right: auto" action="{{ url_for('task_list.logout') }}" method="GET">
+                <button style="float: right;" type="submit" class="logout">Logout</button>
+            </form>
+        </div>
         <!-- <table class="temp"> <tbody>
             <tr>
 
