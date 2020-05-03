@@ -7,7 +7,7 @@ class Team(db.Model):
     name = db.Column(db.String(64), nullable=False)
     health = db.Column(db.Integer, nullable=False)
 
-    members = db.relationship("Account", back_populates="team")
+    members = db.relationship("Account")
 
 
 class Submission(db.Model):
@@ -15,6 +15,7 @@ class Submission(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     percent_mark = db.Column(db.Integer)  # null = unmarked
+    # percent_mark = db.Column(db.Integer, nullable=False)
     
     task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
     task = db.relationship("Task", back_populates="submissions")
