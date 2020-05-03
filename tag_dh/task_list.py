@@ -3,19 +3,19 @@ from flask import (
 )
 
 from tag_dh import db
-from tag_dh.models import Task, Account
+from tag_dh.models import *
 
 bp = Blueprint('task_list', __name__)
 
 @bp.route('/tasks', methods=('GET', 'POST'))
 def index():
-    if not session.get('validUser', False):
+    if not session.get('account'):
         return redirect(url_for('task_list.login'))
 
     if request.method == 'POST':
         name = request.form['name']
         if not name:
-            flash('Task name is required.', username)
+            flash('Task name is required.')
         else:
             db.session.add(Task(name=name))
             db.session.commit()
@@ -30,38 +30,43 @@ def signup():
         username = request.form["username"]
         password = request.form["password"]
         chk_password = request.form["chk_password"]
+        
+        if Account.query.filter_by(user=username).count():
+            flash("That username is already taken.")
+            return redirect(url_for('task_list.signup', **request.args))
         if password != chk_password:
             flash("The passwords don't match")
-            return redirect(url_for('task_list.signup'))
-        else:
-            db.session.add(Account(user=username, pwrd=password))
-            db.session.commit()
-            flash("Account successfully created")
-            return redirect(url_for('task_list.index'))
+            return redirect(url_for('task_list.signup', **request.args))
+        
+        db.session.add(Account(user=username, pwrd=password))
+        db.session.commit()
+        flash("Account successfully created")
+        return redirect(url_for('task_list.index', **request.args))
 
     return render_template('task_list/signup.html')
 
 @bp.route('/login', methods=('GET','POST'))
 def login():
-    if session.get("validUser", False):
-        return redirect(url_for('task_list.index'))
+    if session.get("validUser"):
+        return redirect(url_for(request.args.get("next", "task_list.index")))
 
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if Account.query.filter_by(user=username).filter_by(pwrd=password).first() == None:
+        
+        account = Account.query.filter_by(user=username).filter_by(pwrd=password).first()
+        if account is None:
             flash("Incorrect username or password")
-            return redirect(url_for('task_list.login'))
-        else:
-            session['validUser'] = True
-            session['username'] = username
-            return redirect(url_for('task_list.index'))
+            return redirect(url_for('task_list.login', **request.args))
+        
+        session['account'] = account
+        return redirect(url_for(request.args.get("next", "task_list.index")))
 
     return render_template('task_list/login.html')
 
 @bp.route('/logout', methods=('GET','POST'))
 def logout():
-    session['validUser'] = False
+    session['account'] = None
     flash("You have been logged out.")
     return redirect(url_for('task_list.login'))
 

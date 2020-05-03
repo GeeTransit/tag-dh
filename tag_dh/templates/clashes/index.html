@@ -1,9 +1,38 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Clashroom Main Page{% endblock %}</h1>
+<h1>{% block title %}Clashes{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-<p>Yeah there's nothing here yet...</p>
+<p>Hey there, {{ session['account'].username }}</p>
+<form action="{{ url_for('task_list.logout') }}" method="GET">
+    <button type="submit">Logout</button>
+</form>
+
+<!-- New Clash -->
+<h3>New Clash</h3>
+<form method="POST">
+    <input type="text" placeholder="Clash Name" name="name" required>
+    <button type="submit">Create</button>
+</form>
+
+<!-- Current Clashes -->
+{% if clashes %}
+<h3>Your Clashes</h3>
+<table>
+    {% for clash in clashes %}
+    <tr>
+        <!-- Clash Name -->
+        <a href="{{ url_for('clashes.clash', id=clash['id']) }}"><td>{{ clash['name'] }}</td></a>
+        <!-- Delete Button -->
+        <td>
+            <form action="{{ url_for('clashes.delete', id=task['id']) }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
 {% endblock %}

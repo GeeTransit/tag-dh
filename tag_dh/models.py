@@ -52,6 +52,18 @@ class Post(db.Model):
     def __repr__(self):
         return f'<Post: id={self.id!r}>'
 
+class Clash(db.Model):
+    __tablename__ = 'clash'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False)
+
+    posts = db.relationship("PostClashLink", back_populates="clash")
+    accounts = db.relationship("ClashAccountLink", back_populates="clash")
+
+    def __repr__(self):
+        return f'<Clash: id={self.id!r} name={self.name!r}>'
+
 class Account(db.Model):
     __tablename__ = 'account'
 
@@ -64,15 +76,3 @@ class Account(db.Model):
 
     def __repr__(self):
         return f'<Account: id={self.id!r} user={self.user!r}>'
-
-class Clash(db.Model):
-    __tablename__ = 'clash'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-
-    posts = db.relationship("PostClashLink", back_populates="clash")
-    accounts = db.relationship("ClashAccountLink", back_populates="clash")
-
-    def __repr__(self):
-        return f'<Clash: id={self.id!r} name={self.name!r}>'
