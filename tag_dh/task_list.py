@@ -12,6 +12,12 @@ bp = Blueprint('task_list', __name__)
 def student():
     return render_template('task_list/student.html')
 
+@bp.route('/teacher', methods=('GET',))
+def teacher():
+    return render_template('task_list/teacher.html')
+
+
+
 @bp.route('/tasks', methods=('GET', 'POST'))
 def index():
     if not session.get('validUser', False):
