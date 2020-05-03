@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Task View{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('task_list.tasks') }}" method="GET">
+    <button type="submit">Back To All Tasks</button>
+</form>
+
+{% if atleast("teacher") %}
+<h3>Delete Task</h3>
+<form method="DELETE">
+    <button type="submit">Delete</button>
+</form>
+{% endif %}
+
+<h3>Task Info</h3>
+{{ task['name'] }}
+
+<h3>New Submission</h3>
+<form method="POST">
+    <input type="text" placeholder="Submission Text" name="text" required>
+    <br>
+    <button type="submit">Add Submission</button>
+</form>
+
+<!-- filtering is done inside task_list.task -->
+<h3>All Submissions</h3>
+<table>
+    {% for submission in submissions %}
+    {% if atleast("teacher") or submission.account == getaccount() %}
+    <tr>
+        <td>{{ submission['text'] }}</td>
+        {% if submission.percent_mark != None %}
+        <td>{{ submission.percent_mark ~ '%' }}</td>
+        {% else %}
+        <td>Unmarked</td>
+        {% endif %}
+        
+        <!-- Submission View -->
+        <td>
+            <form action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
+                <button type="submit" class="view">View</button>
+            </form>
+        </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% endblock %}

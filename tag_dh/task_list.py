@@ -26,7 +26,12 @@ def getaccount():
 def atleast(minimum):
     return stage(minimum) <= stage(getaccount())
 
-render_template = partial(render_template, atleast=atleast)
+render_template = partial(
+    render_template, 
+    atleast=atleast,
+    session=session,
+    getaccount=getaccount,
+)
 
 
 @bp.route('/', methods=['GET'])
@@ -43,27 +48,111 @@ def student():
 def teacher():
     return render_template('task_list/teacher.html')
 
+@bp.route('/toggle_dark', methods=['GET'])
+def toggle_dark():
+    session["dark"] = not session.get("dark", False)
+    return redirect(url_for(request.args.get("next", "task_list.index")))
+
 @bp.route('/tasks', methods=('GET', 'POST'))
 def tasks():
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
 
+    if request.method == "GET":
+        tasks = Task.query.all()
+        return render_template('task_list/tasks.html', tasks=tasks)
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to remove tasks")
+        return redirect(url_for('task_list.tasks'))
+
     if request.method == 'POST':
-        if not atleast("teacher"):
-            flash("You don't have enough permissions to remove tasks")
-            return redirect(url_for('task_list.tasks'))
-        
         name = request.form['name']
         if not name:
             flash('Task name is required.')
             return redirect(url_for('task_list.tasks'))
-
-        db.session.add(Task(name=name))
+        
+        task = Task(name=name)
+        db.session.add(task)
         db.session.commit()
+        return redirect(url_for('task_list.task', id=task.id))
+
+
+@bp.route('/tasks/<int:id>', methods=["GET", "POST", "DELETE"])
+def task(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    task = Task.query.get(id)
+    account = getaccount()
+
+    if request.method == "GET":
+        submissions = task.submissions
+        return render_template('task_list/task.html', id=id, task=task, submissions=submissions)
+    
+    if request.method == 'POST':
+        text = request.form['text']
+        if not text:
+            flash('Submission text cannot be empty.')
+            return redirect(url_for('task_list.task', id))
+        
+        submission = Submission(text=text, task=task, account=account)
+        db.session.add(submission)
+        db.session.commit()
+        return redirect(url_for('task_list.submission', id=submission.id))
+
+    # need teacher for delete
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to remove tasks")
+        return redirect(url_for('task_list.task', id=id))
+    
+    if request.method == "DELETE":
+        if task is not None:
+            db.session.delete(task)
+            db.session.commit()
         return redirect(url_for('task_list.tasks'))
 
-    tasks = Task.query.all()
-    return render_template('task_list/tasks.html', tasks=tasks)
+
+@bp.route('/submission/<int:id>', methods=["GET", "POST", "DELETE"])
+def submission(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    submission = Submission.query.get(id)
+    task = Task.query.get(submission.task.id)
+    account = getaccount()
+
+    if request.method == "GET":
+        return render_template('task_list/submission.html', id=id, task=task, submission=submission)
+
+    # need teacher for delete
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to remove tasks")
+        return redirect(url_for('task_list.submission', id=id))
+    
+    if request.method == "POST":
+        mark = request.form['mark']
+        try:
+            mark = (int(mark) if mark else None)
+        except ValueError:
+            flash("Mark must be a number or empty.")
+            return redirect(url_for('task_list.submission', id=id))
+        
+        if mark is not None and not 0 <= mark <= 100:
+            flash("Mark must be from 0 to 100.")
+            return redirect(url_for('task_list.submission', id=id))
+
+        submission.percent_mark = mark
+        db.session.commit()
+        return redirect(url_for('task_list.submission', id=id))
+    
+    if request.method == "DELETE":
+        if submission is not None:
+            db.session.delete(submission)
+            db.session.commit()
+        return redirect(url_for('task_list.task', id=task.id))
+
+
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -115,17 +204,3 @@ def logout():
     session['account'] = None
     flash("You have been logged out.")
     return redirect(url_for('task_list.login'))
-
-
-@bp.route('/tasks/<int:id>/delete', methods=('POST',))
-def delete(id):
-    if not atleast("teacher"):
-        flash("You don't have enough permissions to remove tasks")
-        return redirect(url_for('task_list.tasks'))
-    
-    task = Task.query.get(id)
-    if task is not None:
-        db.session.delete(task)
-        db.session.commit()
-    
-    return redirect(url_for('task_list.tasks'))
