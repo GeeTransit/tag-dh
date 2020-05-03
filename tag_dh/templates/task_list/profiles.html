@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Accounts List{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h3>All Accounts</h3>
+<table>
+    {% for account in accounts %}
+    <tr>
+        <td>{{ account.user }}</td>
+        <td>
+            <form action="{{ url_for('task_list.profile', id=account.id) }}" method="GET">
+                <button type="submit">View</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

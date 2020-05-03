@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Teams List{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+{% if atleast("teacher") %}
+<form action="{{ url_for('task_list.create') }}" method="GET">
+    <button type="submit">New Team</button>
+</form>
+{% endif %}
+
+<h3>Current Teams</h3>
+<table>
+    {% for team in teams %}
+    <tr>
+        <td>{{ team.name }} at {{ team.health }} health</td>
+        <td>
+            <form action="{{ url_for('task_list.team', id=team.id) }}" method="GET">
+                <button type="submit">View</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -8,7 +8,6 @@
 
 <!-- New Task -->
 {% if atleast("teacher") %}
-<h3>New Task</h3>
 <form method="POST">
     <input type="text" placeholder="Task Text" name="name" required>
     <br>
@@ -17,22 +16,20 @@
 {% endif %}
 
 <!-- Current Tasks -->
-{% if tasks %}
 <h3>Current Tasks</h3>
 <table>
     {% for task in tasks %}
     <tr>
         <!-- Task Name -->
-        <td class="task">{{ task['name'] }}</td>
+        <td>{{ task['name'] }}</td>
         
         <!-- Task View -->
         <td>
             <form action="{{ url_for('task_list.task', id=task['id']) }}" method="GET">
-                <button type="submit" class="view">View</button>
+                <button type="submit">View</button>
             </form>
         </td>
     </tr>
     {% endfor %}
 </table>
-{% endif %}
 {% endblock %}

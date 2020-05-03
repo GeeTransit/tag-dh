@@ -7,7 +7,7 @@ class Team(db.Model):
     name = db.Column(db.String(64), nullable=False)
     health = db.Column(db.Integer, nullable=False)
 
-    members = db.relationship("Account")
+    members = db.relationship("Account", back_populates="team")
 
 
 class Submission(db.Model):

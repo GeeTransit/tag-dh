@@ -26,8 +26,9 @@ def getaccount():
 def atleast(minimum):
     return stage(minimum) <= stage(getaccount())
 
+old_render_template = render_template
 render_template = partial(
-    render_template, 
+    old_render_template, 
     atleast=atleast,
     session=session,
     getaccount=getaccount,
@@ -120,14 +121,13 @@ def submission(id):
 
     submission = Submission.query.get(id)
     task = Task.query.get(submission.task.id)
-    account = getaccount()
+    account = Account.query.get(submission.account.id)
 
     if request.method == "GET":
-        return render_template('task_list/submission.html', id=id, task=task, submission=submission)
+        return render_template('task_list/submission.html', id=id, task=task, account=account, submission=submission)
 
-    # need teacher for delete
     if not atleast("teacher"):
-        flash("You don't have enough permissions to remove tasks")
+        flash("You don't have enough permissions to modify tasks")
         return redirect(url_for('task_list.submission', id=id))
     
     if request.method == "POST":
@@ -151,6 +151,127 @@ def submission(id):
             db.session.delete(submission)
             db.session.commit()
         return redirect(url_for('task_list.task', id=task.id))
+
+@bp.route('/teams', methods=['GET', 'POST'])
+def teams():
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    if request.method == "GET":
+        teams = Team.query.all()
+        return render_template('task_list/teams.html', teams=teams)
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify teams")
+        return redirect(url_for('task_list.teams'))
+
+    if request.method == 'POST':
+        name = request.form['name']
+        health = request.form['health']
+        usernames = request.form['usernames']
+        
+        members = [Account.query.filter(Account.user == username).first() for username in usernames.split()]
+        if not all(members):
+            flash('All usernames must be real usernames.')
+            return redirect(url_for('task_list.teams'))
+        
+        team = Team(name=name, health=health, members=members)
+        db.session.add(team)
+        db.session.commit()
+        return redirect(url_for('task_list.team', id=team.id))
+
+@bp.route('/teams/<int:id>', methods=["GET", "POST", "DELETE"])
+def team(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    team = Team.query.get(id)
+    account = getaccount()
+
+    if request.method == "GET":
+        members = team.members
+        return render_template('task_list/team.html', id=id, team=team, members=members)
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify teams")
+        return redirect(url_for('task_list.team', id=id))
+    
+    if request.method == 'POST':
+        health = request.form['health']
+        try:
+            health = int(health)
+        except ValueError:
+            flash("Mark must be a number.")
+            return redirect(url_for('task_list.team', id=id))
+        
+        if not 0 <= health:
+            flash("Health must be at least 0.")
+            return redirect(url_for('task_list.team', id=id))
+        
+        team.health = health
+        db.session.commit()
+        return redirect(url_for('task_list.team', id=id))
+    
+    if request.method == "DELETE":
+        if team is not None:
+            db.session.delete(team)
+            db.session.commit()
+        return redirect(url_for('task_list.teams'))
+
+@bp.route('/teams/create', methods=["GET"])
+def create():
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify teams")
+        return redirect(url_for('task_list.teams'))
+
+    if request.method == "GET":
+        return render_template('task_list/create.html')
+
+@bp.route('/profiles', methods=['GET'])
+def profiles():
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+
+    if request.method == "GET":
+        accounts = Account.query.all()
+        return render_template('task_list/profiles.html', accounts=accounts)
+
+@bp.route('/profile/<int:id>', methods=["GET", "POST", "DELETE"])
+def profile(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+    
+    account = Account.query.get(id)
+
+    if request.method == "GET":
+        badges = account.badges
+        if badges is None:
+            badges = []
+        else:
+            badges = badges.split()
+        return render_template('task_list/profile.html', account=account, badges=badges)
+
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify badges")
+        return redirect(url_for('task_list.profile', id=id))
+    
+    if request.method == "POST":
+        badges = request.form['badges']
+        account.badges = badges
+        db.session.commit()
+        return redirect(url_for('task_list.profile', id=id))
+
+    if not atleast("admin"):
+        flash("You don't have enough permissions to modify accounts")
+        return redirect(url_for('task_list.profile', id=id))
+    
+    if request.method == "DELETE":
+        db.session.delete(account)
+        db.session.commit()
+        return redirect(url_for('task_list.profiles'))
 
 
 

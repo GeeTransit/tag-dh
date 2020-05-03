@@ -1,34 +1,33 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Task View{% endblock %}</h1>
+<h1>{% block title %}Accounts View{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-<form action="{{ url_for('task_list.tasks') }}" method="GET">
-    <button type="submit">Back To All Tasks</button>
+<form action="{{ url_for('task_list.profiles') }}" method="GET">
+    <button type="submit">Back To All Accounts</button>
 </form>
 
-{% if atleast("teacher") %}
-<form method="DELETE">
-    <button type="submit">Delete</button>
-</form>
+<h3>{{ account.name }}</h3>
+<p>Role: {{ account.role }}</p>
+<p>Team: {{ account.team.name }}</p>
+{% if badges %}
+<ul>
+    {% for badge in badges %}
+    <li>{{ badge }}</li>
+    {% endfor %}
+</ul>
 {% endif %}
 
-<h3>Task Info</h3>
-{{ task['name'] }}
-
+{% if atleast("teacher") %}
 <form method="POST">
-    <input type="text" placeholder="Submission Text" name="text" required>
-    <br>
-    <button type="submit">Add Submission</button>
+    <input type="text" placeholder="Badges" name="badges"><br/>
+    <button type="submit">Change</button>
 </form>
 
-<!-- filtering is done inside task_list.task -->
-<h3>All Submissions</h3>
 <table>
     {% for submission in submissions %}
-    {% if atleast("teacher") or submission.account == getaccount() %}
     <tr>
         <td>{{ submission['text'] }}</td>
         {% if submission.percent_mark != None %}
@@ -36,16 +35,20 @@
         {% else %}
         <td>Unmarked</td>
         {% endif %}
-        
-        <!-- Submission View -->
+
         <td>
             <form action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
                 <button type="submit">View</button>
             </form>
         </td>
     </tr>
-    {% endif %}
     {% endfor %}
 </table>
+{% endif %}
 
+{% if atleast("admin") %}
+<form method="DELETE">
+    <button type="submit">Remove User</button>
+</form>
+{% endif %}
 {% endblock %}

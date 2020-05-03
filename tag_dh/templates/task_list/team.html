@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Team View{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('task_list.teams') }}" method="GET">
+    <button type="submit">Back To All Teams</button>
+</form>
+
+{% if atleast("teacher") %}
+<form method="DELETE">
+    <button type="submit">Delete</button>
+</form>
+{% endif %}
+
+<h3>Team Info</h3>
+<ul>
+    <li>Team Name: {{ team.name }}</li>
+    <li>Team Health: {{ team.health }}</li>
+    {% for account in team.members %}
+    <a href="{{ url_for('task_list.profile', id=account.id) }}"><li>{{ account.user }}</li></a>
+    {% endfor %}
+</ul>
+
+{% endblock %}
