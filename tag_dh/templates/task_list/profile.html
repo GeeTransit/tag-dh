@@ -11,7 +11,7 @@
 
 <h3>{{ account.name }}</h3>
 <p>Role: {{ account.role }}</p>
-<p>Team: {{ account.team.name }}</p>
+<p>Team: {{ account.team.name or "No team currently." }}</p>
 {% if badges %}
 <ul>
     {% for badge in badges %}

@@ -279,12 +279,12 @@ def profile(id):
     account = Account.query.get(id)
 
     if request.method == "GET":
-        badges = account.badges
-        if badges is None:
-            badges = []
-        else:
-            badges = badges.split()
-        return render_template('task_list/profile.html', id=id, account=account, badges=badges)
+        badges = account.badges.split() if account.badges is not None else []
+        submissions = account.submissions
+        if not atleast("teacher"):
+            if account.id != getaccount().id:
+                submissions = []
+        return render_template('task_list/profile.html', id=id, account=account, submissions=submissions, badges=badges)
 
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify badges")
