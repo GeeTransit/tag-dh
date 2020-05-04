@@ -384,6 +384,7 @@ def signup():
         db.session.add(Account(user=username, pwrd=password, role="student"))
         db.session.commit()
         flash("Account successfully created")
+        session['username'] = username
         return redirect(url_for('task_list.index'))
 
     return render_template('task_list/signup.html')
