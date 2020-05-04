@@ -6,9 +6,10 @@
 
 {% block content %}
 <form action="{{ url_for('task_list.teams') }}" method="GET">
-    <button type="submit">Back To All Teams</button>
+    <button type="submit">All Teams</button>
 </form>
 
+<h3>Teacher</h3>
 <form action="{{ url_for('task_list.teams') }}" method="POST">
     <input type="text" placeholder="Team Name" name="name" required><br/>
     <input type="text" placeholder="Health" name="health" required><br/>

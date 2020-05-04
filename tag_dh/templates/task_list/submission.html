@@ -6,18 +6,17 @@
 
 {% block content %}
 <form action="{{ url_for('task_list.task', id=task.id) }}" method="GET">
-    <button type="submit">Back To Task</button>
+    <button type="submit">Parent Task</button>
 </form>
 <form action="{{ url_for('task_list.profile', id=account.id) }}" method="GET">
-    <button type="submit">Back To Profile</button>
+    <button type="submit">Creator's Profile</button>
 </form>
 
 {% if atleast("teacher") %}
+<h3>Teacher</h3>
 <form action="{{ url_for('task_list.submissiondelete', id=id) }}" method="POST">
     <button type="submit">Delete</button>
 </form>
-
-<h3>Mark Submission</h3>
 <form method="POST">
     <input type="number" placeholder="Mark" name="mark">
     <br>
@@ -26,13 +25,7 @@
 {% endif %}
 
 <h3>Submission Info</h3>
-{{ submission['text'] }}
-
-<h3>Submission Mark</h3>
-{% if submission['percent_mark'] != None %}
-<p>{{ submission['percent_mark']~'%' }}</p>
-{% else %}
-<p>Unmarked</p>
-{% endif %}
+<p>{{ "Mark: " ~ submission.percent_mark ~ '%' if submission.percent_mark != None else "Unmarked" }}</p>
+<p>{{ submission['text'] }}</p>
 
 {% endblock %}

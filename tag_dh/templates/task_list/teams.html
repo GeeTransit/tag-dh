@@ -7,6 +7,7 @@
 {% block content %}
 
 {% if atleast("teacher") %}
+<h3>Teacher</h3>
 <form action="{{ url_for('task_list.create') }}" method="GET">
     <button type="submit">New Team</button>
 </form>

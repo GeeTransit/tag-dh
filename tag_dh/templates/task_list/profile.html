@@ -9,7 +9,8 @@
     <button type="submit">Back To All Accounts</button>
 </form>
 
-<h3>{{ account.user }}</h3>
+<h3>Account Info</h3>
+<p>User: {{ account.user }}</p>
 <p>Role: {{ account.role }}</p>
 <p>Team: {{ account.team.name or "No team currently." }}</p>
 {% if badges %}
