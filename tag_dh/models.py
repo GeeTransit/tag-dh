@@ -1,4 +1,4 @@
-from tag_dh import db
+from . import db
 
 class Team(db.Model):
     __tablename__ = 'team'
@@ -56,16 +56,33 @@ class Account(db.Model):
     user = db.Column(db.Text, nullable=False)
     pwrd = db.Column(db.Text, nullable=False)
     role = db.Column(db.Text, nullable=False)
-    badges = db.Column(db.Text, nullable=True)
     
     team_id = db.Column(db.Integer, db.ForeignKey("team.id"), nullable=True)  # can be None (teamless)
     team = db.relationship("Team", back_populates="members")
 
     submissions = db.relationship("Submission", back_populates="account")
+    # badges = db.relationship("Badge", back_populates="recipient")
+    # awarded = db.relationship("Badge", back_populates="awarder")
 
     def __repr__(self):
         return f'<Account: id={self.id!r} user={self.user!r}>'
 
+'''
+class Badge(db.Model):
+    __tablename__ = 'badge'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), nullable=False)
+
+    recipient_id = db.Column(db.Integer, db.ForeignKey("account.id"))
+    recipient = db.relationship("Account", foreign_keys=[recipient_id], back_populates="badges")
+
+    awarder_id = db.Column(db.Integer, db.ForeignKey("account.id"))
+    awarder = db.relationship("Account", foreign_keys=[awarder_id], back_populates="awarded")
+
+    def __repr__(self):
+        return f'<Badge: id={self.id!r} name={self.name!r}>'
+'''
 
 # Links between Post, Clash, and Account
 

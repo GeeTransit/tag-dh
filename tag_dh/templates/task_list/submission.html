@@ -9,7 +9,7 @@
     <button type="submit">Parent Task</button>
 </form>
 <form action="{{ url_for('task_list.profile', id=account.id) }}" method="GET">
-    <button type="submit">Creator's Profile</button>
+    <button type="submit">Creator Profile</button>
 </form>
 
 {% if atleast("teacher") %}

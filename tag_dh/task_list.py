@@ -4,8 +4,8 @@ from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session
 )
 
-from tag_dh import db
-from tag_dh.models import *
+from . import db
+from .models import *
 
 bp = Blueprint('task_list', __name__)
 
@@ -127,8 +127,8 @@ def submission(id):
         return redirect(url_for('task_list.login'))
 
     submission = Submission.query.get(id)
-    task = Task.query.get(submission.task.id)
-    account = Account.query.get(submission.account.id)
+    task = submission.task
+    account = submission.account
 
     if request.method == "GET":
         return render_template('task_list/submission.html', id=id, task=task, account=account, submission=submission)
@@ -159,8 +159,8 @@ def submissiondelete(id):
         return redirect(url_for('task_list.login'))
 
     submission = Submission.query.get(id)
-    task = Task.query.get(submission.task.id)
-    account = Account.query.get(submission.account.id)
+    task = submission.task
+    account = submission.account
     
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify tasks")
@@ -279,13 +279,13 @@ def profile(id):
     account = Account.query.get(id)
 
     if request.method == "GET":
-        badges = account.badges.split() if account.badges is not None else []
+        # badges = account.badges
         submissions = account.submissions
-        if not atleast("teacher"):
-            if account.id != getaccount().id:
-                submissions = []
-        return render_template('task_list/profile.html', id=id, account=account, submissions=submissions, badges=badges)
+        if not atleast("teacher") and account.id != getaccount().id:
+            submissions = []
+        return render_template('task_list/profile.html', id=id, account=account, submissions=submissions) # , badges=badges)
 
+'''
 @bp.route('/profile/<int:id>/badge', methods=["POST"])
 def profilebadge(id):
     if not atleast("student"):
@@ -298,10 +298,30 @@ def profilebadge(id):
         return redirect(url_for('task_list.profile', id=id))
     
     if request.method == "POST":
-        badges = request.form['badges']
-        account.badges = badges
+        badge = request.form['badge']
+        badge = Badge(recipient=account, awarder=getaccount())
+        # account.badges.append(badge)
+        db.session.add(badge)
         db.session.commit()
         return redirect(url_for('task_list.profile', id=id))
+
+@bp.route('/badge/<int:id>/delete', methods=["POST"])
+def badgedelete(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+    
+    badge = Badge.query.get(id)
+    recipient = badge.recipient
+    
+    if not atleast("teacher"):
+        flash("You don't have enough permissions to modify badges")
+        return redirect(url_for('task_list.profile', id=id))
+    
+    if request.method == "POST":
+        db.session.delete(badge)
+        db.session.commit()
+        return redirect(url_for('task_list.profile', id=id))
+'''
 
 @bp.route('/profile/<int:id>/role', methods=["POST"])
 def profilerole(id):

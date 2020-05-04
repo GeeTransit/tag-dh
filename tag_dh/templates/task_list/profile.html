@@ -6,28 +6,41 @@
 
 {% block content %}
 <form action="{{ url_for('task_list.profiles') }}" method="GET">
-    <button type="submit">Back To All Accounts</button>
+    <button type="submit">All Accounts</button>
 </form>
 
 <h3>Account Info</h3>
 <p>User: {{ account.user }}</p>
 <p>Role: {{ account.role }}</p>
 <p>Team: {{ account.team.name or "No team currently." }}</p>
-{% if badges %}
+{# Badges are removed. To be re-added next commit.
 <h3>Badges</h3>
-<ul>
+{% if badges %}
+<table>
     {% for badge in badges %}
-    <li>{{ badge }}</li>
+    <tr>
+        <td>{{ badge.name }}</td>
+        {% if atleast("teacher") %}
+        <td>
+            <form action="{{ url_for('task_list.badgedelete', id=badge.id) }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        {% endif %}
+    </tr>
     {% endfor %}
-</ul>
+</table>
+{% else %}
+<p>No badges currently.</p>
 {% endif %}
 
 {% if atleast("teacher") %}
 <form action="{{ url_for('task_list.profilebadge', id=id) }}" method="POST">
-    <input type="text" placeholder="Badges" name="badges"><br/>
-    <button type="submit">Change</button>
+    <input type="text" placeholder="Badge" name="badge"><br/>
+    <button type="submit">Add Badge</button>
 </form>
 {% endif %}
+#}
 
 {% if submissions %}
 <h3>Submissions</h3>
