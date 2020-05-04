@@ -13,7 +13,7 @@
 <p>User: {{ account.user }}</p>
 <p>Role: {{ account.role }}</p>
 <p>Team: {{ account.team.name or "No team currently." }}</p>
-{# Badges are removed. To be re-added next commit.
+
 <h3>Badges</h3>
 {% if badges %}
 <table>
@@ -36,11 +36,10 @@
 
 {% if atleast("teacher") %}
 <form action="{{ url_for('task_list.profilebadge', id=id) }}" method="POST">
-    <input type="text" placeholder="Badge" name="badge"><br/>
+    <input type="text" placeholder="Badge" name="name"><br/>
     <button type="submit">Add Badge</button>
 </form>
 {% endif %}
-#}
 
 {% if submissions %}
 <h3>Submissions</h3>

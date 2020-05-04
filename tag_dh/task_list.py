@@ -277,31 +277,32 @@ def profile(id):
         return redirect(url_for('task_list.login'))
     
     account = Account.query.get(id)
+    badges = account.badges
 
     if request.method == "GET":
-        # badges = account.badges
-        submissions = account.submissions
-        if not atleast("teacher") and account.id != getaccount().id:
+        if atleast("teacher") or account.id == getaccount().id:
+            submissions = account.submissions
+        else:
             submissions = []
-        return render_template('task_list/profile.html', id=id, account=account, submissions=submissions) # , badges=badges)
+        return render_template('task_list/profile.html', id=id, account=account, submissions=submissions, badges=badges)
 
-'''
+
 @bp.route('/profile/<int:id>/badge', methods=["POST"])
 def profilebadge(id):
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
     
     account = Account.query.get(id)
+    badges = account.badges
     
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify badges")
         return redirect(url_for('task_list.profile', id=id))
     
     if request.method == "POST":
-        badge = request.form['badge']
-        badge = Badge(recipient=account, awarder=getaccount())
-        # account.badges.append(badge)
-        db.session.add(badge)
+        name = request.form['name']
+        badge = Badge(name=name, recipient=account, awarder=getaccount())
+        # db.session.add(badge)
         db.session.commit()
         return redirect(url_for('task_list.profile', id=id))
 
@@ -309,19 +310,19 @@ def profilebadge(id):
 def badgedelete(id):
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
-    
+
     badge = Badge.query.get(id)
     recipient = badge.recipient
-    
+
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify badges")
-        return redirect(url_for('task_list.profile', id=id))
+        return redirect(url_for('task_list.profile', id=recipient.id))
     
     if request.method == "POST":
         db.session.delete(badge)
         db.session.commit()
-        return redirect(url_for('task_list.profile', id=id))
-'''
+        return redirect(url_for('task_list.profile', id=recipient.id))
+
 
 @bp.route('/profile/<int:id>/role', methods=["POST"])
 def profilerole(id):

@@ -61,13 +61,14 @@ class Account(db.Model):
     team = db.relationship("Team", back_populates="members")
 
     submissions = db.relationship("Submission", back_populates="account")
-    # badges = db.relationship("Badge", back_populates="recipient")
-    # awarded = db.relationship("Badge", back_populates="awarder")
+    
+    #   backrefs
+    # badges = Badge.recipient
+    # awarded = Badge.awarder
 
     def __repr__(self):
         return f'<Account: id={self.id!r} user={self.user!r}>'
 
-'''
 class Badge(db.Model):
     __tablename__ = 'badge'
 
@@ -75,14 +76,14 @@ class Badge(db.Model):
     name = db.Column(db.String(64), nullable=False)
 
     recipient_id = db.Column(db.Integer, db.ForeignKey("account.id"))
-    recipient = db.relationship("Account", foreign_keys=[recipient_id], back_populates="badges")
+    recipient = db.relationship("Account", foreign_keys=[recipient_id], backref="badges")
 
     awarder_id = db.Column(db.Integer, db.ForeignKey("account.id"))
-    awarder = db.relationship("Account", foreign_keys=[awarder_id], back_populates="awarded")
+    awarder = db.relationship("Account", foreign_keys=[awarder_id], backref="awarded")
 
     def __repr__(self):
         return f'<Badge: id={self.id!r} name={self.name!r}>'
-'''
+
 
 # Links between Post, Clash, and Account
 
