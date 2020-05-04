@@ -328,6 +328,11 @@ def signup():
             flash("The passwords don't match")
             return redirect(url_for('task_list.signup'))
         
+        account = Account.query.filter(Account.user == username).first()
+        if account is not None:
+            flash("There is a user with that username already")
+            return redirect(url_for('task_list.signup'))
+
         db.session.add(Account(user=username, pwrd=password, role="student"))
         db.session.commit()
         flash("Account successfully created")
