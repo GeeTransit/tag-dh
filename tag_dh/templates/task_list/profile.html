@@ -25,7 +25,9 @@
     <input type="text" placeholder="Badges" name="badges"><br/>
     <button type="submit">Change</button>
 </form>
+{% endif %}
 
+{% if submissions %}
 <table>
     {% for submission in submissions %}
     <tr>
