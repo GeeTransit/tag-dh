@@ -25,9 +25,15 @@
                 <form class="control" action="{{ url_for('task_list.toggle_dark', next=endpoint) }}" method="GET">
                     <button class="control cbutton dark_mode">Dark Mode</button>
                 </form>
+                {% if session.get("username") != None %}
                 <form class="control" action="{{ url_for('task_list.logout') }}" method="GET">
                     <button class="control cbutton" type="submit">Logout</button>
                 </form>
+                {% else %}
+                <form class="control" action="{{ url_for('task_list.login') }}" method="GET">
+                    <button class="control cbutton" type="submit">Login</button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>

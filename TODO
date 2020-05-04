@@ -1,0 +1,54 @@
+IMPORTANT
+	ADD admin can change others' roles
+	ADD indication of own username / profile
+
+POTENTIAL
+	ADD replies to task / submission / team members
+	ADD admin view of everything  (table view in /admin/<database>)
+	CHANGE team picking to use selection (updates students' team)
+	ADD randomized team picking
+	REVAMP task / submissions
+		more integrated with the team
+		team submissions
+	EDIT submissions
+	ADD multiple classes
+		VISIBILITY
+			anyone can see their classes  (student / teacher of)
+			only admin can see all classes
+		CLASS
+			anyone can create a class  (creator is teacher for class)
+			only teacher can delete their classes
+		PERMISSIONS
+			students default to seeing only
+			TASKS teachers
+				add / remove
+			SUBMISSIONS
+				students: add
+				teachers: mark / remove
+			TEAMS teachers
+				add / remove teams
+			PROFILES teachers
+				add / remove students
+				promote / demote teachers
+		INTERNAL
+			move student / teacher from account to class  (keep admin / normal)
+			models
+				CLASSROOM < CLASS_LINK > ACCOUNT
+					CLASSROOM has multiple accounts
+					ACCOUNT has multiple classrooms
+					cannot use 1<? (one to many)
+						CLASSROOM > ACCOUNT  (classrooms have 1 student)
+						CLASSROOM < ACCOUNT  (accounts have 1 class)
+				CLASSROOM
+					accounts: CLASS_LINK.classroom
+				CLASS_LINK
+					relation str {teacher, student}
+					classroom CLASSROOM.accounts
+					account ACCOUNT.classrooms
+				MODIFY ACCOUNT
+					classroom CLASS_LINK.account
+
+MINOR
+	CHANGE profile link
+		rename Profiles to Profile
+		change profiles to profile(id=account.id)

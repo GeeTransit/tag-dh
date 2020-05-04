@@ -316,6 +316,9 @@ def profiledelete(id):
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if session.get("account"):
+        return redirect(url_for('task_list.index'))
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -361,6 +364,6 @@ def logout():
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
 
-    session['account'] = None
+    session['username'] = None
     flash("You have been logged out.")
     return redirect(url_for('task_list.login'))
