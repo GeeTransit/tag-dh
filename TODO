@@ -1,5 +1,4 @@
 IMPORTANT
-	ADD admin can change others' roles
 	ADD indication of own username / profile
 
 POTENTIAL
@@ -11,6 +10,7 @@ POTENTIAL
 		more integrated with the team
 		team submissions
 	EDIT submissions
+	MOVE submissions to be connected with task instead of profile  (maybe)
 	ADD multiple classes
 		VISIBILITY
 			anyone can see their classes  (student / teacher of)

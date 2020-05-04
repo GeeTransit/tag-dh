@@ -271,7 +271,7 @@ def profiles():
         accounts = Account.query.all()
         return render_template('task_list/profiles.html', accounts=accounts)
 
-@bp.route('/profile/<int:id>', methods=["GET", "POST", "DELETE"])
+@bp.route('/profile/<int:id>', methods=["GET", "DELETE"])
 def profile(id):
     if not atleast("student"):
         return redirect(url_for('task_list.login'))
@@ -286,6 +286,13 @@ def profile(id):
                 submissions = []
         return render_template('task_list/profile.html', id=id, account=account, submissions=submissions, badges=badges)
 
+@bp.route('/profile/<int:id>/badge', methods=["POST"])
+def profilebadge(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+    
+    account = Account.query.get(id)
+    
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify badges")
         return redirect(url_for('task_list.profile', id=id))
@@ -293,6 +300,27 @@ def profile(id):
     if request.method == "POST":
         badges = request.form['badges']
         account.badges = badges
+        db.session.commit()
+        return redirect(url_for('task_list.profile', id=id))
+
+@bp.route('/profile/<int:id>/role', methods=["POST"])
+def profilerole(id):
+    if not atleast("student"):
+        return redirect(url_for('task_list.login'))
+    
+    account = Account.query.get(id)
+    
+    if not atleast("admin"):
+        flash("You don't have enough permissions to modify roles")
+        return redirect(url_for('task_list.profile', id=id))
+    
+    if request.method == "POST":
+        role = request.form['role']
+        if role not in ROLES:
+            flash(f"Invalid role {role}: must be one of {', '.join(ROLES)}")
+            return redirect(url_for('task_list.profile', id=id))
+        
+        account.role = role
         db.session.commit()
         return redirect(url_for('task_list.profile', id=id))
 
