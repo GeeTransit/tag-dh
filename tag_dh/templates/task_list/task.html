@@ -9,6 +9,14 @@
     <button type="submit">All Tasks</button>
 </form>
 
+<h3>Info</h3>
+<p>{{ task['name'] }}</p>
+
+<form method="POST">
+    <input type="text" placeholder="Submission Text" name="text" required><br/>
+    <button type="submit">Add Submission</button>
+</form>
+
 {% if atleast("teacher") %}
 <h3>Teacher</h3>
 <form action="{{ url_for('task_list.taskdelete', id=id) }}" method="POST">
@@ -16,37 +24,24 @@
 </form>
 {% endif %}
 
-<h3>Task Info</h3>
-<p>{{ task['name'] }}</p>
-
-<form method="POST">
-    <input type="text" placeholder="Submission Text" name="text" required>
-    <br>
-    <button type="submit">Add Submission</button>
-</form>
-
-<!-- filtering is done inside task_list.task -->
-<h3>All Submissions</h3>
-    <table>
-        {% for submission in submissions %}
-        {% if atleast("teacher") or submission.account == getaccount() %}
+<h3>Submissions</h3>
+<table>
+    {% for submission in submissions %}
         <tr>
-            <td>{{ submission['text'] }}</td>
-            {% if submission.percent_mark != None %}
-            <td>{{ submission.percent_mark ~ '%' }}</td>
-            {% else %}
-            <td>Unmarked</td>
+            {% if atleast("teacher") %}
+            <td>{{ submission.account.user | truncate(48, True) }}</td>
             {% endif %}
-            
-            <!-- Submission View -->
+            <td>{{ submission.text | truncate(48, True) }}</td>
+            <td>{{ "<em>Unmarked</em>"|safe if submission.percent_mark is none else submission.percent_mark ~ "%" }}</td>
             <td>
                 <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
                     <button type="submit">View</button>
                 </form>
             </td>
         </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
+    {% else %}
+        <tr><td><em>No submissions currently.</em></td></tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

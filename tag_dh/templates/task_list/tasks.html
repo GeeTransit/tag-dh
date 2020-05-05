@@ -6,7 +6,6 @@
 
 {% block content %}
 
-<!-- New Task -->
 {% if atleast("teacher") %}
 <h3>Teacher</h3>
 <form method="POST">
@@ -15,21 +14,19 @@
 </form>
 {% endif %}
 
-<!-- Current Tasks -->
 <h3>Current Tasks</h3>
 <table>
     {% for task in tasks %}
-    <tr>
-        <!-- Task Name -->
-        <td>{{ task['name'] }}</td>
-        
-        <!-- Task View -->
-        <td>
-            <form class="view_button" action="{{ url_for('task_list.task', id=task['id']) }}" method="GET">
-                <button type="submit">View</button>
-            </form>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ task.name | truncate(48, True) }}</td>
+            <td>
+                <form class="view_button" action="{{ url_for('task_list.task', id=task['id']) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td><em>No submissions currently.</em></td></tr>
     {% endfor %}
 </table>
 

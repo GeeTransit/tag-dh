@@ -13,17 +13,20 @@
 </form>
 {% endif %}
 
-<h3>Current Teams</h3>
+<h3>Teams</h3>
 <table>
     {% for team in teams %}
-    <tr>
-        <td>{{ team.name }} at {{ team.health }} health</td>
-        <td>
-            <form action="{{ url_for('task_list.team', id=team.id) }}" method="GET">
-                <button type="submit">View</button>
-            </form>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ team.name | truncate(48, True) }}<td>
+            <td>{{ team.health }} <em>health</em></td>
+            <td>
+                <form action="{{ url_for('task_list.team', id=team.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td><em>No teams currently.</em></td></tr>
     {% endfor %}
 </table>
 {% endblock %}

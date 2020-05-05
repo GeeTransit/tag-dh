@@ -9,64 +9,78 @@
     <button type="submit">All Accounts</button>
 </form>
 
-<h3>Account Info</h3>
-<p>User: {{ account.user }}</p>
-<p>Role: {{ account.role }}</p>
-<p>Team: {{ account.team.name or "No team currently." }}</p>
-
-<h3>Badges</h3>
-{% if badges %}
+<h3>Info</h3>
 <table>
-    {% for badge in badges %}
     <tr>
-        <td>{{ badge.name }}</td>
-        {% if atleast("teacher") %}
-        <td>
-            <form action="{{ url_for('task_list.badgedelete', id=badge.id) }}" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
+        <td>Username</td>
+        <td>{{ account.user }}</td>
+    </tr>
+    <tr>
+        <td>Role</td>
+        <td>{{ account.role }}</td>
+    </tr>
+    <tr>
+        <td>Team</td>
+        {% if account.team.name is defined %}
+            <td>{{ account.team.name | truncate(48, True) }}</td>
+            <td>
+                <form class="view_button" action="{{ url_for('task_list.team', id=account.team.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        {% else %}
+            <td><em>No team currently.</em></td>
         {% endif %}
     </tr>
+</table>
+    
+
+<h3>Badges</h3>
+<table>
+    {% for badge in badges %}
+        <tr>
+            <td>{{ badge.name }}</td>
+            {% if atleast("teacher") %}
+            <td>
+                <form action="{{ url_for('task_list.badgedelete', id=badge.id) }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+    {% else %}
+        <tr><td><em>No badges currently.</em></td></tr>
     {% endfor %}
 </table>
-{% else %}
-<p>No badges currently.</p>
-{% endif %}
 
 {% if atleast("teacher") %}
 <form action="{{ url_for('task_list.profilebadge', id=id) }}" method="POST">
-    <input type="text" placeholder="Badge" name="name"><br/>
+    <input type="text" placeholder="Badge" name="name">
     <button type="submit">Add Badge</button>
 </form>
 {% endif %}
 
-{% if submissions %}
 <h3>Submissions</h3>
 <table>
     {% for submission in submissions %}
-    <tr>
-        <td>{{ submission['text'] }}</td>
-        {% if submission.percent_mark != None %}
-        <td>{{ submission.percent_mark ~ '%' }}</td>
-        {% else %}
-        <td>Unmarked</td>
-        {% endif %}
-
-        <td>
-            <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
-                <button type="submit">View</button>
-            </form>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ submission.text | truncate(48, True) }}</td>
+            <td>{{ "<em>Unmarked</em>"|safe if submission.percent_mark is none else "Mark: " ~ submission.percent_mark ~ "%" }}</td>
+            <td>
+                <form class="view_button" action="{{ url_for('task_list.submission', id=submission.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td><em>No submissions currently.</em></td></tr>
     {% endfor %}
 </table>
-{% endif %}
 
 {% if atleast("admin") %}
 <h3>Admin</h3>
 <form action="{{ url_for('task_list.profilerole', id=id) }}" method="POST">
-    <input type="text" placeholder="Role" name="role"><br/>
+    <input type="text" placeholder="Role" name="role">
     <button type="submit">Change Role</button>
 </form>
 <form action="{{ url_for('task_list.profiledelete', id=id) }}" method="POST">

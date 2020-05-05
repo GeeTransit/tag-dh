@@ -9,22 +9,66 @@
     <button type="submit">All Teams</button>
 </form>
 
+<h3>Info</h3>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{ team.name }}</td>
+    </tr>
+    <tr>
+        <td>Health</td>
+        <td>{{ team.health }}</td>
+    </tr>
+</table>
+
 {% if atleast("teacher") %}
 <h3>Teacher</h3>
 <form action="{{ url_for('task_list.teamdelete', id=id) }}" method="POST">
     <button type="submit">Delete</button>
 </form>
+{# TODO Implement setting new name of team.
+<form method="POST">
+    <input type="text" placeholder="Name" name="name">
+    <button type="submit">Set Name</button>
+</form>
+#}
+<form method="POST">
+    <input type="number" placeholder="Health" name="health">
+    <button type="submit">Set Health</button>
+</form>
 {% endif %}
 
-<h3>Team Info</h3>
-<p>Team Name: {{ team.name }}</p>
-<p>Team Health: {{ team.health }}</p>
-{% if team.members %}
-<ul>
-    {% for account in team.members %}
-    <a href="{{ url_for('task_list.profile', id=account.id) }}"><li>{{ account.user }}</li></a>
-    {% endfor %}
-</ul>
+<h3>Members</h3>
+{# TODO Implement adding new member(s)
+{% if atleast("teacher") %}
+    <form method="POST">
+        <input type="text" placeholder="Username" name="username">
+        <button type="submit">Add</button>
+    </form>
 {% endif %}
+#}
+<table>
+    {% for member in team.members %}
+        <tr>
+            <td>{{ member.user }}</td>
+            <td>
+                <form class="view_button" action="{{ url_for('task_list.profile', id=member.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+            {# TODO Implement deleting member
+            {% if atleast("teacher") %}
+                <td>
+                    <form class="view_button" action="{{ url_for('task_list.profile', id=member.id) }}" method="GET">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            {% endif %}
+            #}
+        </tr>
+    {% else %}
+        <tr><td><em>No team members currently.</em></td></tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

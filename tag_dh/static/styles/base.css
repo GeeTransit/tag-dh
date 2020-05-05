@@ -79,10 +79,12 @@ button {
     cursor: pointer;
 }
 
+/* Not needed for task (truncated with ...) Might be needed for others
 .task {
     word-wrap: break-word;
     padding-left: 50px;
 }
+*/
 
 .delete {
     width: 100%;

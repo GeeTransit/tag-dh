@@ -20,18 +20,20 @@ def stage(account):
         return ROLES.index(role)
     return -1
 
-def getaccount():
+def current_account():
     return Account.query.filter(Account.user == session.get("username")).first()
+getaccount = current_account
 
 def atleast(minimum):
-    return stage(minimum) <= stage(getaccount())
+    return stage(minimum) <= stage(current_account())
 
 old_render_template = render_template
 render_template = partial(
     old_render_template, 
     atleast=atleast,
     session=session,
-    getaccount=getaccount,
+    getaccount=current_account,
+    current_account=current_account,
 )
 
 
@@ -85,10 +87,11 @@ def task(id):
         return redirect(url_for('task_list.login'))
 
     task = Task.query.get(id)
-    account = getaccount()
+    submissions = task.submissions
 
     if request.method == "GET":
-        submissions = task.submissions
+        if not atleast("teacher"):
+            submissions = filter(lambda sub: sub.account == getaccount(), submissions)
         return render_template('task_list/task.html', id=id, task=task, submissions=submissions)
     
     if request.method == 'POST':
@@ -97,8 +100,7 @@ def task(id):
             flash('Submission text cannot be empty.')
             return redirect(url_for('task_list.task', id))
         
-        submission = Submission(text=text, task=task, account=account)
-        db.session.add(submission)
+        submission = Submission(text=text, task=task, account=getaccount())
         db.session.commit()
         return redirect(url_for('task_list.submission', id=submission.id))
 
@@ -108,7 +110,6 @@ def taskdelete(id):
         return redirect(url_for('task_list.login'))
 
     task = Task.query.get(id)
-    account = getaccount()
     
     if not atleast("teacher"):
         flash("You don't have enough permissions to remove tasks")
@@ -187,6 +188,10 @@ def teams():
 
     if request.method == 'POST':
         name = request.form['name']
+        if len(name) > 64:
+            flash("Team name too long: Must be less than 64 characters")
+            return redirect(url_for('task_list.create'))
+            
         health = request.form['health']
         usernames = request.form['usernames']
         
@@ -206,7 +211,6 @@ def team(id):
         return redirect(url_for('task_list.login'))
 
     team = Team.query.get(id)
-    account = getaccount()
 
     if request.method == "GET":
         members = team.members
@@ -221,7 +225,7 @@ def team(id):
         try:
             health = int(health)
         except ValueError:
-            flash("Mark must be a number.")
+            flash("Health must be a number.")
             return redirect(url_for('task_list.team', id=id))
         
         if not 0 <= health:
@@ -238,7 +242,6 @@ def teamdelete(id):
         return redirect(url_for('task_list.login'))
 
     team = Team.query.get(id)
-    account = getaccount()
 
     if not atleast("teacher"):
         flash("You don't have enough permissions to modify teams")
@@ -301,6 +304,10 @@ def profilebadge(id):
     
     if request.method == "POST":
         name = request.form['name']
+        if len(name) > 64:
+            flash("Badge name too long: Must be less than 64 characters")
+            return redirect(url_for('task_list.profile', id=id))
+            
         badge = Badge(name=name, recipient=account, awarder=getaccount())
         # db.session.add(badge)
         db.session.commit()
@@ -370,7 +377,20 @@ def signup():
 
     if request.method == "POST":
         username = request.form["username"]
+        if not username:
+            flash("Username cannot be empty")
+            return redirect(url_for('task_list.signup'))
+        if len(username) > 64:
+            flash("Username too long: Must be less than 64 characters")
+            return redirect(url_for('task_list.signup'))
+        if " " in username:
+            flash("Username cannot have spaces")
+            return redirect(url_for('task_list.signup'))
+            
         password = request.form["password"]
+        if not password:
+            flash("Password cannot be empty")
+            return redirect(url_for('task_list.signup'))
 
         chk_password = request.form["chk_password"]
         if password != chk_password:

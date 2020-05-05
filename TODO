@@ -1,7 +1,10 @@
 IMPORTANT
 	ADD indication of own username / profile
+	ADD team name setting
 
 POTENTIAL
+	CHANGE no _ currently -> hidden if not able to see (such as student seeing others' submissions)
+	REVAMP user interface to integrate changing values (such as marking)
 	ADD replies to task / submission / team members
 	ADD admin view of everything  (table view in /admin/<database>)
 	CHANGE team picking to use selection (updates students' team)

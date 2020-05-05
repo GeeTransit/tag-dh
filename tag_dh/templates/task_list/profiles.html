@@ -5,17 +5,20 @@
 {% endblock %}
 
 {% block content %}
-<h3>All Accounts</h3>
+<h3>Accounts</h3>
 <table>
     {% for account in accounts %}
-    <tr>
-        <td>{{ account.user }}</td>
-        <td>
-            <form action="{{ url_for('task_list.profile', id=account.id) }}" method="GET">
-                <button type="submit">View</button>
-            </form>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ account.user }}</td>
+            <td>
+                <form action="{{ url_for('task_list.profile', id=account.id) }}" method="GET">
+                    <button type="submit">View</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        {# if this is reached somehow, something big time wrong #}
+        <tr><td><em>No accounts currently.</em></td></tr>
     {% endfor %}
 </table>
 {% endblock %}
