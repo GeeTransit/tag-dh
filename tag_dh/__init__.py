@@ -23,9 +23,7 @@ def create_app():
     from . import models
 
     from . import task_list
-    # from . import clash
     app.register_blueprint(task_list.bp)
-    # app.register_blueprint(clash.bp)
 
     return app
 
